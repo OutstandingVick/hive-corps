@@ -1,0 +1,31 @@
+[
+  {
+    "id": "cst_adept_lagos",
+    "company": "AdeptWorks Lagos",
+    "industry": "professional services",
+    "memories": [
+      {
+        "id": "mem_001",
+        "type": "preference",
+        "text": "Prefers Dell laptops for new office rollouts.",
+        "confidence": 0.91
+      },
+      {
+        "id": "mem_002",
+        "type": "delivery",
+        "text": "Prefers conservative delivery promises over fastest possible estimates.",
+        "confidence": 0.86
+      },
+      {
+        "id": "mem_003",
+        "type": "support",
+        "text": "Usually accepts 3-year onsite support when onboarding more than 15 devices.",
+        "confidence": 0.83
+      }
+    ],
+    "approvedPolicies": [
+      "Require manager approval for discounts above 10%.",
+      "Include itemized quote PDFs for all orders above $15,000."
+    ]
+  }
+]

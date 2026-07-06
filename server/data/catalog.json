@@ -1,0 +1,35 @@
+[
+  {
+    "sku": "LAP-DELL-5440",
+    "name": "Dell Latitude 5440",
+    "category": "laptop",
+    "brand": "Dell",
+    "unitPrice": 1180,
+    "unitCost": 820,
+    "stock": 72,
+    "leadTimeDays": 4,
+    "supportEligible": true
+  },
+  {
+    "sku": "LAP-LEN-T14",
+    "name": "Lenovo ThinkPad T14",
+    "category": "laptop",
+    "brand": "Lenovo",
+    "unitPrice": 1120,
+    "unitCost": 910,
+    "stock": 40,
+    "leadTimeDays": 6,
+    "supportEligible": true
+  },
+  {
+    "sku": "SUP-3YR-ONSITE",
+    "name": "3-year onsite support",
+    "category": "support",
+    "brand": "HiveCare",
+    "unitPrice": 160,
+    "unitCost": 45,
+    "stock": 999,
+    "leadTimeDays": 0,
+    "supportEligible": false
+  }
+]

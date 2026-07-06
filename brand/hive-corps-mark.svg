@@ -1,0 +1,21 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Hive Corps mark</title>
+  <desc id="desc">A graphite rounded-square app mark with honey-gold connected hexagons forming an H.</desc>
+  <defs>
+    <linearGradient id="honey" x1="72" y1="52" x2="184" y2="214" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4C45A"/>
+      <stop offset="0.52" stop-color="#D99A21"/>
+      <stop offset="1" stop-color="#A96311"/>
+    </linearGradient>
+  </defs>
+  <rect x="28" y="28" width="200" height="200" rx="52" fill="#15171C"/>
+  <g transform="translate(128 136) scale(0.78) translate(-128 -147)">
+    <path d="M128 50L166.971 72.5V117.5L128 140L89.0289 117.5V72.5L128 50Z" fill="url(#honey)"/>
+    <path d="M76 102L114.971 124.5V169.5L76 192L37.0289 169.5V124.5L76 102Z" fill="url(#honey)" fill-opacity="0.94"/>
+    <path d="M180 102L218.971 124.5V169.5L180 192L141.029 169.5V124.5L180 102Z" fill="url(#honey)" fill-opacity="0.94"/>
+    <path d="M128 154L166.971 176.5V221.5L128 244L89.0289 221.5V176.5L128 154Z" fill="url(#honey)" fill-opacity="0.82"/>
+    <path d="M117 88H139V179H117V88Z" fill="#15171C"/>
+    <path d="M73 133H183V155H73V133Z" fill="#15171C"/>
+    <circle cx="180" cy="144" r="11" fill="#1F8F88"/>
+  </g>
+</svg>

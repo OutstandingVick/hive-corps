@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hive Corps | Self-improving agents for B2B operations</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Hive Corps home">
+        <img src="/brand/hive-corps-mark.svg" alt="" />
+        <span>Hive Corps</span>
+      </a>
+      <nav aria-label="Primary">
+        <a href="#workflow">Workflow</a>
+        <a href="#agents">Agents</a>
+        <a href="#proof">Proof</a>
+        <a href="#architecture">Architecture</a>
+      </nav>
+      <a class="header-cta" href="/docs/demo-script.md">Demo Script</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Qwen Cloud Global AI Hackathon · Track 4 Autopilot Agent</p>
+          <h1>Self-improving agents for B2B quote operations.</h1>
+          <p class="hero-text">
+            Hive Corps coordinates specialized agents that turn messy quote requests into approved,
+            auditable customer responses, then learn from every human correction.
+          </p>
+          <div class="hero-actions">
+            <button id="runPrimary" class="primary-action" type="button">Run quote workflow</button>
+            <button id="runLearned" class="secondary-action" type="button">Run learned second quote</button>
+          </div>
+        </div>
+
+        <section class="dashboard-shell" aria-label="Hive Corps dashboard preview">
+          <div class="dashboard-topbar">
+            <span class="status-dot"></span>
+            <strong>Live workflow console</strong>
+            <span id="modeLabel">deterministic-demo</span>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel request-panel">
+              <div class="panel-header">
+                <span>Inbound Request</span>
+                <strong id="requestId">req_001</strong>
+              </div>
+              <h2 id="requestSubject">Need laptops for new Lagos office</h2>
+              <p id="requestBody">Loading request...</p>
+            </article>
+
+            <article class="panel score-panel">
+              <div class="metric">
+                <span>Manual edits</span>
+                <strong id="editCount">1</strong>
+              </div>
+              <div class="metric">
+                <span>Risk score</span>
+                <strong id="riskScore">72</strong>
+              </div>
+              <div class="metric">
+                <span>Quote total</span>
+                <strong id="quoteTotal">$0</strong>
+              </div>
+            </article>
+
+            <article class="panel timeline-panel" id="workflow">
+              <div class="panel-header">
+                <span>Agent Timeline</span>
+                <strong id="agentCount">7 agents</strong>
+              </div>
+              <ol id="timeline" class="timeline"></ol>
+            </article>
+
+            <article class="panel quote-panel">
+              <div class="panel-header">
+                <span>Generated Quote</span>
+                <strong id="approvalStatus">pending</strong>
+              </div>
+              <div id="quoteItems" class="quote-items"></div>
+              <div class="quote-total">
+                <span>Approved total</span>
+                <strong id="quoteTotalLarge">$0</strong>
+              </div>
+            </article>
+
+            <article class="panel risk-panel">
+              <div class="panel-header">
+                <span>Risk & Approval Gate</span>
+                <strong id="riskGate">checking</strong>
+              </div>
+              <ul id="riskFlags" class="risk-list"></ul>
+            </article>
+
+            <article class="panel learning-panel">
+              <div class="panel-header">
+                <span>Self-Improvement Loop</span>
+                <strong id="learningStatus">proposed</strong>
+              </div>
+              <ul id="learningList" class="learning-list"></ul>
+            </article>
+          </div>
+        </section>
+      </section>
+
+      <section class="metrics-band" aria-label="Submission proof metrics">
+        <div>
+          <strong>82%</strong>
+          <span>fewer quote edits after learning</span>
+        </div>
+        <div>
+          <strong>7</strong>
+          <span>specialized agents in one workflow</span>
+        </div>
+        <div>
+          <strong>100%</strong>
+          <span>actions tied to audit evidence</span>
+        </div>
+        <div>
+          <strong>2</strong>
+          <span>runs show before/after improvement</span>
+        </div>
+      </section>
+
+      <section class="section" id="agents">
+        <div class="section-copy">
+          <p class="eyebrow">Agent Corps</p>
+          <h2>Each agent has one job, one output, and one proof trail.</h2>
+        </div>
+        <div class="agent-cards">
+          <article><strong>Intake</strong><span>Turns ambiguous email into structured requirements.</span></article>
+          <article><strong>Planner</strong><span>Builds the task graph and chooses the tools.</span></article>
+          <article><strong>Memory</strong><span>Retrieves customer preferences and approved policies.</span></article>
+          <article><strong>Catalog</strong><span>Checks product availability, pricing, stock, and lead time.</span></article>
+          <article><strong>Risk</strong><span>Blocks unsafe discounts, low margins, and missing data.</span></article>
+          <article><strong>Writer</strong><span>Generates the quote, rationale, and customer response.</span></article>
+          <article><strong>Learning</strong><span>Converts human edits into memory and policy proposals.</span></article>
+        </div>
+      </section>
+
+      <section class="section two-column" id="proof">
+        <div class="section-copy">
+          <p class="eyebrow">Judge Proof</p>
+          <h2>Visible evidence, not hidden scripts.</h2>
+          <p>
+            Every demo run exports a generated quote, agent trace, and audit log. The fallback mode uses
+            deterministic fixtures so judges can still verify the product when external APIs are unavailable.
+          </p>
+        </div>
+        <div class="proof-links">
+          <a href="/proof/generated/sample-agent-run.json">Latest agent run JSON</a>
+          <a href="/proof/generated/generated-quote.json">Generated quote JSON</a>
+          <a href="/proof/generated/audit-log.json">Audit log JSON</a>
+          <a href="/proof/alibaba-cloud-deployment.md">Alibaba Cloud proof plan</a>
+        </div>
+      </section>
+
+      <section class="section architecture" id="architecture">
+        <div class="section-copy">
+          <p class="eyebrow">Architecture</p>
+          <h2>Qwen-powered orchestration with controlled execution.</h2>
+        </div>
+        <div class="arch-diagram" role="img" aria-label="Architecture diagram">
+          <span>Customer Request</span>
+          <span>Hive Corps API<br />Alibaba Cloud</span>
+          <span>Qwen Agent Orchestrator</span>
+          <span>Tools<br />Catalog · Memory · Pricing</span>
+          <span>Approval Gate</span>
+          <span>Quote + Audit + Learning</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

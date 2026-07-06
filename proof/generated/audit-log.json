@@ -1,0 +1,105 @@
+[
+  {
+    "name": "Intake Agent",
+    "status": "complete",
+    "summary": "Extracted customer, product category, quantity, urgency, location, and missing fields.",
+    "evidence": {
+      "customer": "AdeptWorks Lagos",
+      "quantity": 12,
+      "category": "laptop",
+      "location": "Lagos",
+      "urgency": "next week"
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  },
+  {
+    "name": "Planner Agent",
+    "status": "complete",
+    "summary": "Created a quote-to-response task graph with memory, catalog, risk, approval, and learning steps.",
+    "evidence": {
+      "plan": [
+        "retrieve_memory",
+        "check_catalog",
+        "price_quote",
+        "review_risk",
+        "approval_gate",
+        "generate_output",
+        "learn_from_edits"
+      ]
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  },
+  {
+    "name": "Memory Agent",
+    "status": "complete",
+    "summary": "Retrieved customer preferences and approved policies from persistent memory.",
+    "evidence": {
+      "memories": [
+        {
+          "id": "mem_001",
+          "type": "preference",
+          "text": "Prefers Dell laptops for new office rollouts.",
+          "confidence": 0.91
+        },
+        {
+          "id": "mem_002",
+          "type": "delivery",
+          "text": "Prefers conservative delivery promises over fastest possible estimates.",
+          "confidence": 0.86
+        },
+        {
+          "id": "mem_003",
+          "type": "support",
+          "text": "Usually accepts 3-year onsite support when onboarding more than 15 devices.",
+          "confidence": 0.83
+        }
+      ],
+      "approvedPolicies": [
+        "Require manager approval for discounts above 10%.",
+        "Include itemized quote PDFs for all orders above $15,000."
+      ]
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  },
+  {
+    "name": "Catalog Agent",
+    "status": "complete",
+    "summary": "Selected an in-stock Dell laptop and attached 3-year onsite support based on customer memory.",
+    "evidence": {
+      "selectedSku": "LAP-DELL-5440",
+      "supportSku": "SUP-3YR-ONSITE",
+      "stock": 72,
+      "leadTimeDays": 4
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  },
+  {
+    "name": "Risk Agent",
+    "status": "complete",
+    "summary": "No high-risk pricing or delivery issues found.",
+    "evidence": {
+      "riskFlags": [],
+      "margin": 29.8,
+      "approvalRequired": false
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  },
+  {
+    "name": "Quote Writer Agent",
+    "status": "complete",
+    "summary": "Generated a customer-ready quote and internal rationale.",
+    "evidence": {
+      "quoteSummary": "12 Dell Latitude 5440 devices with 3-year onsite support for $14,794."
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  },
+  {
+    "name": "Learning Agent",
+    "status": "pending_feedback",
+    "summary": "Prepared to compare human edits against the agent proposal and propose reusable memory/policy updates.",
+    "evidence": {
+      "learningMode": "human-approved memory and policy proposals"
+    },
+    "timestamp": "2026-07-06T11:50:57.377Z"
+  }
+]

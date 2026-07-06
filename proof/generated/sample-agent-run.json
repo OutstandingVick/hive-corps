@@ -1,0 +1,227 @@
+{
+  "runId": "run_req_002_1783338657377",
+  "mode": "deterministic-demo",
+  "qwen": {
+    "enabled": false,
+    "provider": "qwen-cloud",
+    "model": "qwen-max",
+    "baseUrl": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+    "calls": [
+      {
+        "ok": false,
+        "skipped": true,
+        "provider": "qwen-cloud",
+        "model": "qwen-max",
+        "agentName": "Intake Agent",
+        "reason": "Qwen live mode is disabled. Set DEMO_MODE=false and QWEN_API_KEY to enable."
+      },
+      {
+        "ok": false,
+        "skipped": true,
+        "provider": "qwen-cloud",
+        "model": "qwen-max",
+        "agentName": "Planner Agent",
+        "reason": "Qwen live mode is disabled. Set DEMO_MODE=false and QWEN_API_KEY to enable."
+      },
+      {
+        "ok": false,
+        "skipped": true,
+        "provider": "qwen-cloud",
+        "model": "qwen-max",
+        "agentName": "Risk Agent",
+        "reason": "Qwen live mode is disabled. Set DEMO_MODE=false and QWEN_API_KEY to enable."
+      },
+      {
+        "ok": false,
+        "skipped": true,
+        "provider": "qwen-cloud",
+        "model": "qwen-max",
+        "agentName": "Quote Writer Agent",
+        "reason": "Qwen live mode is disabled. Set DEMO_MODE=false and QWEN_API_KEY to enable."
+      },
+      {
+        "ok": false,
+        "skipped": true,
+        "provider": "qwen-cloud",
+        "model": "qwen-max",
+        "agentName": "Learning Agent",
+        "reason": "Qwen live mode is disabled. Set DEMO_MODE=false and QWEN_API_KEY to enable."
+      }
+    ],
+    "successfulCalls": 0,
+    "failedCalls": 0
+  },
+  "request": {
+    "id": "req_002",
+    "from": "ops@adeptworks.example",
+    "company": "AdeptWorks Lagos",
+    "subject": "Second office batch",
+    "body": "We may need 12 more laptops for the same rollout. Please use the same kind of option if it worked for the first batch, and include support.",
+    "receivedAt": "2026-07-02T10:34:00.000Z"
+  },
+  "agents": [
+    {
+      "name": "Intake Agent",
+      "status": "complete",
+      "summary": "Extracted customer, product category, quantity, urgency, location, and missing fields.",
+      "evidence": {
+        "customer": "AdeptWorks Lagos",
+        "quantity": 12,
+        "category": "laptop",
+        "location": "Lagos",
+        "urgency": "next week"
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    },
+    {
+      "name": "Planner Agent",
+      "status": "complete",
+      "summary": "Created a quote-to-response task graph with memory, catalog, risk, approval, and learning steps.",
+      "evidence": {
+        "plan": [
+          "retrieve_memory",
+          "check_catalog",
+          "price_quote",
+          "review_risk",
+          "approval_gate",
+          "generate_output",
+          "learn_from_edits"
+        ]
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    },
+    {
+      "name": "Memory Agent",
+      "status": "complete",
+      "summary": "Retrieved customer preferences and approved policies from persistent memory.",
+      "evidence": {
+        "memories": [
+          {
+            "id": "mem_001",
+            "type": "preference",
+            "text": "Prefers Dell laptops for new office rollouts.",
+            "confidence": 0.91
+          },
+          {
+            "id": "mem_002",
+            "type": "delivery",
+            "text": "Prefers conservative delivery promises over fastest possible estimates.",
+            "confidence": 0.86
+          },
+          {
+            "id": "mem_003",
+            "type": "support",
+            "text": "Usually accepts 3-year onsite support when onboarding more than 15 devices.",
+            "confidence": 0.83
+          }
+        ],
+        "approvedPolicies": [
+          "Require manager approval for discounts above 10%.",
+          "Include itemized quote PDFs for all orders above $15,000."
+        ]
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    },
+    {
+      "name": "Catalog Agent",
+      "status": "complete",
+      "summary": "Selected an in-stock Dell laptop and attached 3-year onsite support based on customer memory.",
+      "evidence": {
+        "selectedSku": "LAP-DELL-5440",
+        "supportSku": "SUP-3YR-ONSITE",
+        "stock": 72,
+        "leadTimeDays": 4
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    },
+    {
+      "name": "Risk Agent",
+      "status": "complete",
+      "summary": "No high-risk pricing or delivery issues found.",
+      "evidence": {
+        "riskFlags": [],
+        "margin": 29.8,
+        "approvalRequired": false
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    },
+    {
+      "name": "Quote Writer Agent",
+      "status": "complete",
+      "summary": "Generated a customer-ready quote and internal rationale.",
+      "evidence": {
+        "quoteSummary": "12 Dell Latitude 5440 devices with 3-year onsite support for $14,794."
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    },
+    {
+      "name": "Learning Agent",
+      "status": "pending_feedback",
+      "summary": "Prepared to compare human edits against the agent proposal and propose reusable memory/policy updates.",
+      "evidence": {
+        "learningMode": "human-approved memory and policy proposals"
+      },
+      "timestamp": "2026-07-06T11:50:57.377Z"
+    }
+  ],
+  "quote": {
+    "quoteId": "qt_req_002",
+    "customer": "AdeptWorks Lagos",
+    "lineItems": [
+      {
+        "sku": "LAP-DELL-5440",
+        "name": "Dell Latitude 5440",
+        "quantity": 12,
+        "unitPrice": 1180,
+        "total": 14160
+      },
+      {
+        "sku": "SUP-3YR-ONSITE",
+        "name": "3-year onsite support",
+        "quantity": 12,
+        "unitPrice": 160,
+        "total": 1920
+      }
+    ],
+    "subtotal": 16080,
+    "proposedDiscountRate": 0.08,
+    "discountRate": 0.08,
+    "discount": 1286,
+    "total": 14794,
+    "margin": 29.8,
+    "deliveryPromise": "6 business days",
+    "emailDraft": "Hi Mira,\n\nBased on your Lagos office rollout, we recommend 12 Dell Latitude 5440 devices with 3-year onsite support. The approved quote total is $14,794 after an 8% rollout discount. Estimated delivery is 6 business days after approval.\n\nBest,\nHive Corps",
+    "internalRationale": "Deterministic quote rationale based on catalog, margin, customer memory, and policy checks."
+  },
+  "risk": {
+    "score": 24,
+    "approvalRequired": false,
+    "flags": [],
+    "recommendation": "Approve for customer response."
+  },
+  "approval": {
+    "status": "approved",
+    "humanEdit": null,
+    "finalStateChange": "Quote approved for customer response."
+  },
+  "learning": {
+    "status": "applied",
+    "proposals": [
+      "Applied learned 8% discount cap.",
+      "Applied customer preference for Dell Latitude plus 3-year support."
+    ],
+    "expectedNextRunImpact": "No manual discount correction required."
+  },
+  "proof": {
+    "alibabaCloud": {
+      "deploymentTarget": "Alibaba Cloud ECS or Function Compute",
+      "evidenceFile": "proof/alibaba-cloud-deployment.md",
+      "serviceConfigFile": "server/alibaba-cloud-service.example.json"
+    },
+    "artifacts": [
+      "proof/generated/sample-agent-run.json",
+      "proof/generated/generated-quote.json",
+      "proof/generated/audit-log.json"
+    ]
+  }
+}

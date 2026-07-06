@@ -1,0 +1,26 @@
+<svg width="720" height="200" viewBox="0 0 720 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Hive Corps dark logo</title>
+  <desc id="desc">A honey-gold hive mark beside a light Hive Corps wordmark for dark backgrounds.</desc>
+  <defs>
+    <linearGradient id="honey" x1="42" y1="34" x2="150" y2="166" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F4C45A"/>
+      <stop offset="0.52" stop-color="#D99A21"/>
+      <stop offset="1" stop-color="#A96311"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="200" rx="28" fill="#15171C"/>
+  <g>
+    <rect x="32" y="32" width="128" height="128" rx="32" fill="#FAFAF7"/>
+    <g transform="translate(96 102) scale(0.76) translate(-96 -108)">
+      <path d="M96 45.5L120.681 59.75V88.25L96 102.5L71.3189 88.25V59.75L96 45.5Z" fill="url(#honey)"/>
+      <path d="M62 79.5L86.6811 93.75V122.25L62 136.5L37.3189 122.25V93.75L62 79.5Z" fill="url(#honey)" fill-opacity="0.94"/>
+      <path d="M130 79.5L154.681 93.75V122.25L130 136.5L105.319 122.25V93.75L130 79.5Z" fill="url(#honey)" fill-opacity="0.94"/>
+      <path d="M96 113.5L120.681 127.75V156.25L96 170.5L71.3189 156.25V127.75L96 113.5Z" fill="url(#honey)" fill-opacity="0.82"/>
+      <path d="M89 71H103V130H89V71Z" fill="#15171C"/>
+      <path d="M61 101H131V115H61V101Z" fill="#15171C"/>
+      <circle cx="130" cy="108" r="7" fill="#1F8F88"/>
+    </g>
+  </g>
+  <text x="198" y="104" fill="#F9FAFB" font-family="Inter, Sora, Space Grotesk, Arial, sans-serif" font-size="62" font-weight="800" letter-spacing="0">Hive Corps</text>
+  <text x="202" y="140" fill="#D0D5DD" font-family="Inter, Sora, Space Grotesk, Arial, sans-serif" font-size="18" font-weight="500" letter-spacing="0">Self-improving agents for real business workflows</text>
+</svg>

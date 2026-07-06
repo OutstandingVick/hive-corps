@@ -1,0 +1,29 @@
+{
+  "quoteId": "qt_req_002",
+  "customer": "AdeptWorks Lagos",
+  "lineItems": [
+    {
+      "sku": "LAP-DELL-5440",
+      "name": "Dell Latitude 5440",
+      "quantity": 12,
+      "unitPrice": 1180,
+      "total": 14160
+    },
+    {
+      "sku": "SUP-3YR-ONSITE",
+      "name": "3-year onsite support",
+      "quantity": 12,
+      "unitPrice": 160,
+      "total": 1920
+    }
+  ],
+  "subtotal": 16080,
+  "proposedDiscountRate": 0.08,
+  "discountRate": 0.08,
+  "discount": 1286,
+  "total": 14794,
+  "margin": 29.8,
+  "deliveryPromise": "6 business days",
+  "emailDraft": "Hi Mira,\n\nBased on your Lagos office rollout, we recommend 12 Dell Latitude 5440 devices with 3-year onsite support. The approved quote total is $14,794 after an 8% rollout discount. Estimated delivery is 6 business days after approval.\n\nBest,\nHive Corps",
+  "internalRationale": "Deterministic quote rationale based on catalog, margin, customer memory, and policy checks."
+}

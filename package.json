@@ -1,0 +1,21 @@
+{
+  "name": "hive-corps",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Self-improving Qwen-powered agent corps for B2B quote operations.",
+  "scripts": {
+    "start": "node server/index.js",
+    "start:prod": "NODE_ENV=production node server/index.js",
+    "demo:seed": "node scripts/run-demo.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "verify:deployment": "node scripts/verify-deployment.mjs",
+    "verify:workflow": "node tests/workflow.test.mjs",
+    "verify:schemas": "node tests/schema.test.mjs",
+    "test": "npm run verify:schemas && npm run verify:workflow"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "Apache-2.0"
+}
