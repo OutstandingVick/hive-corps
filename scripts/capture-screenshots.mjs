@@ -45,7 +45,8 @@ async function main() {
     env: {
       ...process.env,
       PORT: port,
-      DEMO_MODE: "true"
+      DEMO_MODE: "true",
+      PERSIST_RUNS: "false"
     },
     stdio: ["ignore", "pipe", "pipe"]
   });
@@ -79,12 +80,16 @@ async function main() {
       fullPage: false
     });
 
+    await page.addStyleTag({ content: ".site-header{position:static!important}" });
+    await page.locator(".dashboard-shell").scrollIntoViewIfNeeded();
+    await page.waitForTimeout(250);
     await page.locator(".dashboard-shell").screenshot({
       path: path.join(outputDir, "agent-timeline.png")
     });
 
-    await page.getByRole("button", { name: "Run learned second quote" }).click();
+    await page.locator("#runLearned").click();
     await page.waitForTimeout(400);
+    await page.locator(".dashboard-shell").scrollIntoViewIfNeeded();
     await page.locator(".dashboard-shell").screenshot({
       path: path.join(outputDir, "learning-loop.png")
     });

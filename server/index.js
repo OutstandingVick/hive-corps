@@ -63,7 +63,8 @@ const server = http.createServer(async (req, res) => {
   if (url.pathname === "/api/run-demo") {
     const requestId = url.searchParams.get("requestId") || "req_001";
     const applyLearning = url.searchParams.get("applyLearning") === "true";
-    const run = await runHiveWorkflow({ requestId, applyLearning });
+    const persist = url.searchParams.get("persist") !== "false" && process.env.PERSIST_RUNS !== "false";
+    const run = await runHiveWorkflow({ requestId, applyLearning, persist });
     return sendJson(res, { ...run, validation: validateRun(run) });
   }
 

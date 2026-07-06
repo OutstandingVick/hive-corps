@@ -9,6 +9,17 @@ function qs(id) {
   return document.getElementById(id);
 }
 
+function setText(id, value) {
+  const element = qs(id);
+  if (element) element.textContent = value;
+}
+
+function titleCaseStatus(status) {
+  return status
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
 function renderTimeline(agents) {
   qs("timeline").innerHTML = agents
     .map(
@@ -43,16 +54,25 @@ function renderQuote(quote) {
 
 function renderRun(run) {
   state.currentRun = run;
-  qs("modeLabel").textContent = run.mode;
-  qs("requestId").textContent = run.request.id;
-  qs("requestSubject").textContent = run.request.subject;
-  qs("requestBody").textContent = run.request.body;
-  qs("agentCount").textContent = `${run.agents.length} agents`;
-  qs("riskScore").textContent = run.risk.score;
-  qs("approvalStatus").textContent = run.approval.status.replaceAll("_", " ");
-  qs("riskGate").textContent = run.risk.approvalRequired ? "approval required" : "approved";
-  qs("learningStatus").textContent = run.learning.status;
-  qs("editCount").textContent = run.approval.humanEdit ? "1" : "0";
+  const approvalStatus = titleCaseStatus(run.approval.status);
+  const learningStatus = titleCaseStatus(run.learning.status);
+  const editCount = run.approval.humanEdit ? "1" : "0";
+
+  setText("modeLabel", run.mode);
+  setText("requestId", run.request.id);
+  setText("requestSubject", run.request.subject);
+  setText("requestBody", run.request.body);
+  setText("agentCount", `${run.agents.length} agents`);
+  setText("riskScore", run.risk.score);
+  setText("approvalStatus", approvalStatus);
+  setText("riskGate", run.risk.approvalRequired ? "Review Required" : "Approved");
+  setText("learningStatus", learningStatus);
+  setText("editCount", editCount);
+  setText("proofQuoteTotal", formatCurrency(run.quote.total));
+  setText("proofRiskScore", run.risk.score);
+  setText("proofEditCount", editCount);
+  setText("proofApprovalStatus", run.risk.approvalRequired ? "Review" : "Approved");
+  setText("proofLearningStatus", learningStatus);
 
   renderTimeline(run.agents);
   renderQuote(run.quote);
@@ -76,6 +96,12 @@ async function runDemo(requestId = "req_001", applyLearning = false) {
 
 qs("runPrimary").addEventListener("click", () => runDemo("req_001", false));
 qs("runLearned").addEventListener("click", () => runDemo("req_002", true));
+document.querySelectorAll("[data-run-primary]").forEach((button) => {
+  button.addEventListener("click", () => {
+    runDemo("req_001", false);
+    document.querySelector(".dashboard-shell")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+});
 
 runDemo("req_001", false).catch((error) => {
   qs("requestBody").textContent = error.message;

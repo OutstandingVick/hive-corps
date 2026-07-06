@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hive Corps | Self-improving agents for B2B operations</title>
+    <title>Hive Corps | AI quote operations for B2B teams</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
@@ -18,67 +18,73 @@
         <a href="#proof">Proof</a>
         <a href="#architecture">Architecture</a>
       </nav>
-      <a class="header-cta" href="/docs/demo-script.md">Demo Script</a>
+      <a class="header-cta" href="/docs/demo-script.md">View Demo</a>
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="workflow">
         <div class="hero-copy">
-          <p class="eyebrow">Qwen Cloud Global AI Hackathon · Track 4 Autopilot Agent</p>
-          <h1>Self-improving agents for B2B quote operations.</h1>
+          <p class="eyebrow">AI quote operations for B2B teams</p>
+          <h1>AI agents that turn quote chaos into approved revenue.</h1>
           <p class="hero-text">
-            Hive Corps coordinates specialized agents that turn messy quote requests into approved,
-            auditable customer responses, then learn from every human correction.
+            Hive Corps coordinates specialized agents to handle quote requests, approval checks,
+            catalog decisions, customer-ready responses, and continuous learning from human edits.
           </p>
+
           <div class="hero-actions">
-            <button id="runPrimary" class="primary-action" type="button">Run quote workflow</button>
-            <button id="runLearned" class="secondary-action" type="button">Run learned second quote</button>
+            <button id="runPrimary" class="primary-action" type="button">Run Quote Workflow</button>
+            <button id="runLearned" class="secondary-action" type="button">See How It Learns</button>
+          </div>
+
+          <div class="trust-row" aria-label="Trusted use cases">
+            <span>Built for procurement</span>
+            <span>Sales operations</span>
+            <span>High-volume B2B quoting</span>
           </div>
         </div>
 
-        <section class="dashboard-shell" aria-label="Hive Corps dashboard preview">
+        <section class="dashboard-shell" aria-label="Hive Corps operations console preview">
           <div class="dashboard-topbar">
-            <span class="status-dot"></span>
-            <strong>Live workflow console</strong>
-            <span id="modeLabel">deterministic-demo</span>
+            <div>
+              <span class="status-dot"></span>
+              <strong>Quote Operations Console</strong>
+            </div>
+            <span id="modeLabel" class="mode-pill">deterministic-demo</span>
           </div>
+
+          <div class="executive-strip" aria-label="Workflow summary">
+            <div>
+              <span>Approval status</span>
+              <strong id="approvalStatus">pending</strong>
+            </div>
+            <div>
+              <span>Quote value</span>
+              <strong id="quoteTotal">$0</strong>
+            </div>
+            <div>
+              <span>Risk score</span>
+              <strong id="riskScore">72</strong>
+            </div>
+            <div>
+              <span>Manual edits</span>
+              <strong id="editCount">1</strong>
+            </div>
+          </div>
+
           <div class="dashboard-grid">
             <article class="panel request-panel">
               <div class="panel-header">
-                <span>Inbound Request</span>
+                <span>Incoming quote request</span>
                 <strong id="requestId">req_001</strong>
               </div>
               <h2 id="requestSubject">Need laptops for new Lagos office</h2>
               <p id="requestBody">Loading request...</p>
             </article>
 
-            <article class="panel score-panel">
-              <div class="metric">
-                <span>Manual edits</span>
-                <strong id="editCount">1</strong>
-              </div>
-              <div class="metric">
-                <span>Risk score</span>
-                <strong id="riskScore">72</strong>
-              </div>
-              <div class="metric">
-                <span>Quote total</span>
-                <strong id="quoteTotal">$0</strong>
-              </div>
-            </article>
-
-            <article class="panel timeline-panel" id="workflow">
-              <div class="panel-header">
-                <span>Agent Timeline</span>
-                <strong id="agentCount">7 agents</strong>
-              </div>
-              <ol id="timeline" class="timeline"></ol>
-            </article>
-
             <article class="panel quote-panel">
               <div class="panel-header">
-                <span>Generated Quote</span>
-                <strong id="approvalStatus">pending</strong>
+                <span>Generated quote</span>
+                <strong id="quoteStatus">Customer-ready</strong>
               </div>
               <div id="quoteItems" class="quote-items"></div>
               <div class="quote-total">
@@ -87,9 +93,17 @@
               </div>
             </article>
 
+            <article class="panel timeline-panel">
+              <div class="panel-header">
+                <span>Agent workflow</span>
+                <strong id="agentCount">7 agents</strong>
+              </div>
+              <ol id="timeline" class="timeline"></ol>
+            </article>
+
             <article class="panel risk-panel">
               <div class="panel-header">
-                <span>Risk & Approval Gate</span>
+                <span>Risk & approval gate</span>
                 <strong id="riskGate">checking</strong>
               </div>
               <ul id="riskFlags" class="risk-list"></ul>
@@ -97,58 +111,99 @@
 
             <article class="panel learning-panel">
               <div class="panel-header">
-                <span>Self-Improvement Loop</span>
+                <span>Policy improvement</span>
                 <strong id="learningStatus">proposed</strong>
               </div>
               <ul id="learningList" class="learning-list"></ul>
+            </article>
+
+            <article class="panel audit-panel">
+              <div class="panel-header">
+                <span>Audit trail</span>
+                <strong>Exported</strong>
+              </div>
+              <p>Every request, agent decision, quote output, approval state, and learning recommendation is captured as proof.</p>
+              <a href="/proof/generated/sample-agent-run.json">Open latest run</a>
             </article>
           </div>
         </section>
       </section>
 
-      <section class="metrics-band" aria-label="Submission proof metrics">
-        <div>
-          <strong>82%</strong>
-          <span>fewer quote edits after learning</span>
+      <section class="value-section" aria-label="Business value">
+        <div class="section-heading">
+          <p class="eyebrow">Business value</p>
+          <h2>Move faster without losing operational control.</h2>
         </div>
-        <div>
-          <strong>7</strong>
-          <span>specialized agents in one workflow</span>
-        </div>
-        <div>
-          <strong>100%</strong>
-          <span>actions tied to audit evidence</span>
-        </div>
-        <div>
-          <strong>2</strong>
-          <span>runs show before/after improvement</span>
+        <div class="value-grid">
+          <article>
+            <span>01</span>
+            <strong>Faster quote response times</strong>
+            <p>Turn unstructured requests into structured quotes without waiting on manual triage.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>Fewer manual corrections</strong>
+            <p>Use customer memory and learned policies to reduce repeated edits across similar requests.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Built-in approval controls</strong>
+            <p>Pause risky discounts, low margins, and delivery commitments before they reach customers.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <strong>Auditable decisions</strong>
+            <p>Give finance, procurement, and operations teams a clear trail for every automated action.</p>
+          </article>
         </div>
       </section>
 
       <section class="section" id="agents">
-        <div class="section-copy">
-          <p class="eyebrow">Agent Corps</p>
-          <h2>Each agent has one job, one output, and one proof trail.</h2>
+        <div class="section-heading">
+          <p class="eyebrow">Agent operating model</p>
+          <h2>A coordinated business system, not a single chatbot.</h2>
+          <p>
+            Hive Corps separates the quote workflow into focused agents with clear responsibilities,
+            evidence, and handoffs.
+          </p>
         </div>
         <div class="agent-cards">
-          <article><strong>Intake</strong><span>Turns ambiguous email into structured requirements.</span></article>
-          <article><strong>Planner</strong><span>Builds the task graph and chooses the tools.</span></article>
-          <article><strong>Memory</strong><span>Retrieves customer preferences and approved policies.</span></article>
-          <article><strong>Catalog</strong><span>Checks product availability, pricing, stock, and lead time.</span></article>
-          <article><strong>Risk</strong><span>Blocks unsafe discounts, low margins, and missing data.</span></article>
-          <article><strong>Writer</strong><span>Generates the quote, rationale, and customer response.</span></article>
-          <article><strong>Learning</strong><span>Converts human edits into memory and policy proposals.</span></article>
+          <article><strong>Intake Agent</strong><span>Reads messy requests and extracts customer, quantity, urgency, and missing data.</span></article>
+          <article><strong>Planner Agent</strong><span>Creates the quote-to-response plan and chooses the right business tools.</span></article>
+          <article><strong>Memory Agent</strong><span>Recalls customer preferences, approved policies, and prior decision patterns.</span></article>
+          <article><strong>Catalog Agent</strong><span>Checks products, stock, pricing, delivery timing, and support options.</span></article>
+          <article><strong>Risk Agent</strong><span>Reviews margin, discount policy, delivery promises, and approval requirements.</span></article>
+          <article><strong>Quote Writer Agent</strong><span>Produces customer-ready quote language and internal rationale.</span></article>
+          <article><strong>Learning Agent</strong><span>Turns human edits into proposed memory and policy improvements.</span></article>
         </div>
       </section>
 
-      <section class="section two-column" id="proof">
-        <div class="section-copy">
-          <p class="eyebrow">Judge Proof</p>
-          <h2>Visible evidence, not hidden scripts.</h2>
-          <p>
-            Every demo run exports a generated quote, agent trace, and audit log. The fallback mode uses
-            deterministic fixtures so judges can still verify the product when external APIs are unavailable.
-          </p>
+      <section class="metrics-section" id="proof">
+        <div class="section-heading">
+          <p class="eyebrow">Operational proof</p>
+          <h2>Boardroom-ready workflow evidence.</h2>
+        </div>
+        <div class="metrics-band" aria-label="Proof metrics">
+          <div>
+            <span>Quote generated</span>
+            <strong id="proofQuoteTotal">$30,820</strong>
+          </div>
+          <div>
+            <span>Risk score</span>
+            <strong id="proofRiskScore">72</strong>
+          </div>
+          <div>
+            <span>Manual edits</span>
+            <strong id="proofEditCount">1</strong>
+          </div>
+          <div>
+            <span>Approval status</span>
+            <strong id="proofApprovalStatus">Review</strong>
+          </div>
+          <div>
+            <span>Policy update</span>
+            <strong id="proofLearningStatus">Proposed</strong>
+          </div>
         </div>
         <div class="proof-links">
           <a href="/proof/generated/sample-agent-run.json">Latest agent run JSON</a>
@@ -159,17 +214,37 @@
       </section>
 
       <section class="section architecture" id="architecture">
-        <div class="section-copy">
+        <div class="section-heading">
           <p class="eyebrow">Architecture</p>
-          <h2>Qwen-powered orchestration with controlled execution.</h2>
+          <h2>Simple enough for leaders. Structured enough for operators.</h2>
+          <p>
+            Hive Corps keeps the model inside an auditable workflow with business data, approval gates,
+            and learning controls.
+          </p>
         </div>
         <div class="arch-diagram" role="img" aria-label="Architecture diagram">
           <span>Customer Request</span>
-          <span>Hive Corps API<br />Alibaba Cloud</span>
-          <span>Qwen Agent Orchestrator</span>
-          <span>Tools<br />Catalog · Memory · Pricing</span>
-          <span>Approval Gate</span>
-          <span>Quote + Audit + Learning</span>
+          <span>Agent Planning</span>
+          <span>Catalog + Memory</span>
+          <span>Risk Gate</span>
+          <span>Quote Generation</span>
+          <span>Human Approval</span>
+          <span>Learning Loop</span>
+        </div>
+      </section>
+
+      <section class="closing-cta">
+        <div>
+          <p class="eyebrow">Qwen Cloud Global AI Hackathon submission</p>
+          <h2>Turn every quote request into a faster, safer, smarter workflow.</h2>
+          <p>
+            Hive Corps gives business teams the speed of AI automation with the oversight, proof, and
+            learning loops required for real B2B operations.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button class="primary-action" type="button" data-run-primary>Run Demo Workflow</button>
+          <a class="secondary-link" href="/docs/product-documentation.md">Read Product Docs</a>
         </div>
       </section>
     </main>
