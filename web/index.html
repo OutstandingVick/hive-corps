@@ -7,40 +7,107 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="announcement">
+      <span>Built for Qwen Cloud Global AI Hackathon</span>
+      <a href="../docs/product-documentation.md">Read product brief →</a>
+    </div>
+
     <header class="site-header">
       <a class="brand" href="./index.html" aria-label="Hive Corps home">
         <img src="../brand/hive-corps-mark.svg" alt="" />
         <span>Hive Corps</span>
       </a>
       <nav aria-label="Primary">
-        <a href="#workflow">Workflow</a>
+        <a href="#product">Product</a>
         <a href="#agents">Agents</a>
         <a href="#proof">Proof</a>
         <a href="#architecture">Architecture</a>
       </nav>
-      <a class="header-cta" href="../docs/demo-script.md">View Demo</a>
+      <div class="nav-actions">
+        <a href="../docs/demo-script.md">Docs</a>
+        <button id="navDemo" class="nav-cta" type="button">Book demo</button>
+      </div>
     </header>
 
     <main>
-      <section class="hero" id="workflow">
+      <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">AI quote operations for B2B teams</p>
-          <h1>AI agents that turn quote chaos into approved revenue.</h1>
+          <p class="eyebrow">AI quote operations for modern B2B</p>
+          <h1>The AI revenue workflow platform for B2B quote teams</h1>
           <p class="hero-text">
-            Hive Corps coordinates specialized agents to handle quote requests, approval checks,
-            catalog decisions, customer-ready responses, and continuous learning from human edits.
+            Hive Corps unifies quote intake, catalog decisions, approval controls, customer-ready
+            responses, and audit trails in one automated agent workflow.
           </p>
-
           <div class="hero-actions">
-            <button id="runPrimary" class="primary-action" type="button">Run Quote Workflow</button>
-            <button id="runLearned" class="secondary-action" type="button">See How It Learns</button>
+            <button id="runPrimary" class="primary-action" type="button">Run quote workflow</button>
+            <button id="runLearned" class="secondary-action" type="button">See how it learns</button>
           </div>
+        </div>
 
-          <div class="trust-row" aria-label="Trusted use cases">
-            <span>Built for procurement</span>
-            <span>Sales operations</span>
-            <span>High-volume B2B quoting</span>
+        <div class="hero-visual" aria-label="Hive Corps workflow preview">
+          <div class="workflow-canvas">
+            <div class="canvas-line canvas-line-a"></div>
+            <div class="canvas-line canvas-line-b"></div>
+
+            <article class="paper-card paper-left">
+              <span>REQUEST</span>
+              <strong>25 laptops · Lagos office</strong>
+              <i></i><i></i><i></i>
+            </article>
+
+            <article class="agent-node">
+              <span class="node-dot"></span>
+              <strong>Hive Corps Agent</strong>
+              <small>Planning quote workflow</small>
+            </article>
+
+            <article class="paper-card paper-right">
+              <span>QUOTE</span>
+              <strong id="heroQuoteTotal">$30,820</strong>
+              <em>Review required</em>
+              <i></i><i></i><i></i>
+            </article>
           </div>
+        </div>
+      </section>
+
+      <section class="product-suite" id="product">
+        <div class="section-heading centered">
+          <p class="eyebrow">Hive Corps product suite</p>
+          <h2>Replace quote busywork with one controlled workflow</h2>
+          <p>
+            From ambiguous customer requests to approved customer responses, Hive Corps gives
+            business teams speed without removing human control.
+          </p>
+        </div>
+        <div class="suite-grid">
+          <article>
+            <span>Quote intake</span>
+            <strong>Messy requests become structured requirements.</strong>
+          </article>
+          <article>
+            <span>Approval controls</span>
+            <strong>Discounts, margins, and delivery promises stop at the risk gate.</strong>
+          </article>
+          <article>
+            <span>Customer memory</span>
+            <strong>Preferences and policies are reused across future requests.</strong>
+          </article>
+          <article>
+            <span>Audit trail</span>
+            <strong>Every agent action is reviewable and exportable.</strong>
+          </article>
+        </div>
+      </section>
+
+      <section class="console-section" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Live workflow</p>
+          <h2>A quote operations console your team can actually trust</h2>
+          <p>
+            Run the workflow below to see intake, planning, catalog selection, risk review,
+            quote writing, approval state, and policy learning in one place.
+          </p>
         </div>
 
         <section class="dashboard-shell" aria-label="Hive Corps operations console preview">
@@ -77,7 +144,7 @@
                 <span>Incoming quote request</span>
                 <strong id="requestId">req_001</strong>
               </div>
-              <h2 id="requestSubject">Need laptops for new Lagos office</h2>
+              <h3 id="requestSubject">Need laptops for new Lagos office</h3>
               <p id="requestBody">Loading request...</p>
             </article>
 
@@ -122,66 +189,41 @@
                 <span>Audit trail</span>
                 <strong>Exported</strong>
               </div>
-              <p>Every request, agent decision, quote output, approval state, and learning recommendation is captured as proof.</p>
+              <p>Every request, decision, quote output, approval state, and learning recommendation is captured as proof.</p>
               <a href="../proof/generated/sample-agent-run.json">Open latest run</a>
             </article>
           </div>
         </section>
       </section>
 
-      <section class="value-section" aria-label="Business value">
+      <section class="section split-section" id="agents">
         <div class="section-heading">
-          <p class="eyebrow">Business value</p>
-          <h2>Move faster without losing operational control.</h2>
+          <p class="eyebrow">Agents built on trust</p>
+          <h2>Automate the work. Stay in control.</h2>
         </div>
-        <div class="value-grid">
+        <div class="agent-tabs">
           <article>
             <span>01</span>
-            <strong>Faster quote response times</strong>
-            <p>Turn unstructured requests into structured quotes without waiting on manual triage.</p>
+            <strong>Busywork, handled</strong>
+            <p>Intake, planning, catalog checks, and quote drafting happen automatically.</p>
           </article>
           <article>
             <span>02</span>
-            <strong>Fewer manual corrections</strong>
-            <p>Use customer memory and learned policies to reduce repeated edits across similar requests.</p>
+            <strong>Every action, reviewable</strong>
+            <p>Risky discounts and commitments are surfaced before anything reaches the customer.</p>
           </article>
           <article>
             <span>03</span>
-            <strong>Built-in approval controls</strong>
-            <p>Pause risky discounts, low margins, and delivery commitments before they reach customers.</p>
+            <strong>Improvement, controlled</strong>
+            <p>Human edits become proposed policy and memory updates, not silent model changes.</p>
           </article>
-          <article>
-            <span>04</span>
-            <strong>Auditable decisions</strong>
-            <p>Give finance, procurement, and operations teams a clear trail for every automated action.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="agents">
-        <div class="section-heading">
-          <p class="eyebrow">Agent operating model</p>
-          <h2>A coordinated business system, not a single chatbot.</h2>
-          <p>
-            Hive Corps separates the quote workflow into focused agents with clear responsibilities,
-            evidence, and handoffs.
-          </p>
-        </div>
-        <div class="agent-cards">
-          <article><strong>Intake Agent</strong><span>Reads messy requests and extracts customer, quantity, urgency, and missing data.</span></article>
-          <article><strong>Planner Agent</strong><span>Creates the quote-to-response plan and chooses the right business tools.</span></article>
-          <article><strong>Memory Agent</strong><span>Recalls customer preferences, approved policies, and prior decision patterns.</span></article>
-          <article><strong>Catalog Agent</strong><span>Checks products, stock, pricing, delivery timing, and support options.</span></article>
-          <article><strong>Risk Agent</strong><span>Reviews margin, discount policy, delivery promises, and approval requirements.</span></article>
-          <article><strong>Quote Writer Agent</strong><span>Produces customer-ready quote language and internal rationale.</span></article>
-          <article><strong>Learning Agent</strong><span>Turns human edits into proposed memory and policy improvements.</span></article>
         </div>
       </section>
 
       <section class="metrics-section" id="proof">
-        <div class="section-heading">
+        <div class="section-heading centered">
           <p class="eyebrow">Operational proof</p>
-          <h2>Boardroom-ready workflow evidence.</h2>
+          <h2>Proof that moves at the speed of quoting</h2>
         </div>
         <div class="metrics-band" aria-label="Proof metrics">
           <div>
@@ -214,13 +256,9 @@
       </section>
 
       <section class="section architecture" id="architecture">
-        <div class="section-heading">
+        <div class="section-heading centered">
           <p class="eyebrow">Architecture</p>
-          <h2>Simple enough for leaders. Structured enough for operators.</h2>
-          <p>
-            Hive Corps keeps the model inside an auditable workflow with business data, approval gates,
-            and learning controls.
-          </p>
+          <h2>From request to approved response in one auditable loop</h2>
         </div>
         <div class="arch-diagram" role="img" aria-label="Architecture diagram">
           <span>Customer Request</span>
@@ -234,17 +272,11 @@
       </section>
 
       <section class="closing-cta">
-        <div>
-          <p class="eyebrow">Qwen Cloud Global AI Hackathon submission</p>
-          <h2>Turn every quote request into a faster, safer, smarter workflow.</h2>
-          <p>
-            Hive Corps gives business teams the speed of AI automation with the oversight, proof, and
-            learning loops required for real B2B operations.
-          </p>
-        </div>
+        <p class="eyebrow">Self-improving quote operations</p>
+        <h2>Turn every quote request into a faster, safer, smarter workflow.</h2>
         <div class="hero-actions">
-          <button class="primary-action" type="button" data-run-primary>Run Demo Workflow</button>
-          <a class="secondary-link" href="../docs/product-documentation.md">Read Product Docs</a>
+          <button class="primary-action" type="button" data-run-primary>Run demo workflow</button>
+          <a class="secondary-link" href="../docs/product-documentation.md">Read product docs</a>
         </div>
       </section>
     </main>
