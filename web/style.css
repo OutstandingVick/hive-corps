@@ -1,17 +1,21 @@
 :root {
-  --ink: #202020;
-  --ink-soft: #595959;
-  --muted: #757575;
+  --ink: #15171c;
+  --ink-soft: #414651;
+  --muted: #667085;
   --paper: #ffffff;
-  --cream: #fbfaf7;
-  --line: #e7e2d9;
-  --line-dark: #d7d0c5;
-  --gold: #b8841d;
-  --gold-soft: #fff1ca;
-  --blue-soft: #e7f4ff;
-  --violet-soft: #f3efff;
-  --teal: #19877f;
-  --teal-soft: #e8f5f3;
+  --ivory: #faf8f1;
+  --cream: #fffaf0;
+  --line: #eadfca;
+  --line-dark: #d9c9aa;
+  --gold: #d99a21;
+  --gold-dark: #9a6412;
+  --gold-soft: #fff2cf;
+  --graphite-soft: #242832;
+  --honey-wash: #fff6dc;
+  --blue-soft: #e9f6f5;
+  --violet-soft: #fff3dd;
+  --teal: #1f8f88;
+  --teal-soft: #e7f5f3;
   --risk: #b42318;
   --risk-soft: #fff0ed;
   --shadow: 0 22px 55px rgb(23 23 23 / 0.09);
@@ -30,9 +34,9 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 0% 42%, rgb(185 219 247 / 0.7), transparent 22%),
-    radial-gradient(circle at 100% 38%, rgb(230 223 255 / 0.72), transparent 24%),
-    linear-gradient(180deg, #ffffff 0%, var(--cream) 70%, #ffffff 100%);
+    radial-gradient(circle at 0% 42%, rgb(31 143 136 / 0.13), transparent 22%),
+    radial-gradient(circle at 100% 38%, rgb(217 154 33 / 0.16), transparent 24%),
+    linear-gradient(180deg, #ffffff 0%, var(--ivory) 70%, #ffffff 100%);
   color: var(--ink);
 }
 
@@ -46,8 +50,8 @@ button {
 
 .announcement {
   align-items: center;
-  background: linear-gradient(90deg, #d8eeff, #f7f1ff);
-  color: #666;
+  background: linear-gradient(90deg, #e7f5f3, #fff2cf);
+  color: var(--ink-soft);
   display: flex;
   font-size: 14px;
   gap: 18px;
@@ -57,7 +61,7 @@ button {
 }
 
 .announcement a {
-  color: #525252;
+  color: var(--gold-dark);
   font-weight: 650;
   text-decoration: none;
 }
@@ -100,7 +104,7 @@ nav,
 
 nav a,
 .nav-actions a {
-  color: #6b6b6b;
+  color: var(--muted);
   font-size: 16px;
   font-weight: 520;
   text-decoration: none;
@@ -127,9 +131,9 @@ nav a:hover,
 }
 
 .nav-cta {
-  background: #202020;
-  border: 0;
-  box-shadow: 0 10px 18px rgb(0 0 0 / 0.16);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  box-shadow: 0 10px 18px rgb(21 23 28 / 0.16);
   color: #fff;
   min-height: 48px;
   padding: 0 24px;
@@ -151,7 +155,7 @@ nav a:hover,
 }
 
 .eyebrow {
-  color: #646464;
+  color: var(--gold-dark);
   font-size: 18px;
   font-weight: 520;
   letter-spacing: 0;
@@ -166,7 +170,7 @@ p {
 }
 
 h1 {
-  color: #4a4a4a;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(54px, 6.1vw, 86px);
   font-weight: 500;
@@ -176,7 +180,7 @@ h1 {
 }
 
 .hero-text {
-  color: #787878;
+  color: var(--muted);
   font-size: clamp(20px, 2vw, 28px);
   line-height: 1.45;
   margin: 54px auto 0;
@@ -193,10 +197,10 @@ h1 {
 }
 
 .primary-action {
-  background: #202020;
-  border: 1px solid #202020;
-  box-shadow: 0 10px 18px rgb(0 0 0 / 0.16);
-  color: #fff;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  box-shadow: 0 10px 18px rgb(21 23 28 / 0.16);
+  color: #fffaf0;
   min-height: 56px;
   padding: 0 28px;
 }
@@ -205,7 +209,7 @@ h1 {
 .secondary-link {
   background: rgb(255 255 255 / 0.76);
   border: 1px solid var(--line-dark);
-  color: #3f3f3f;
+  color: var(--ink);
   min-height: 56px;
   padding: 0 28px;
 }
@@ -246,26 +250,26 @@ h1 {
 }
 
 .workflow-canvas::before {
-  background: var(--blue-soft);
+  background: var(--teal-soft);
   left: -60px;
 }
 
 .workflow-canvas::after {
-  background: var(--violet-soft);
+  background: var(--gold-soft);
   right: -60px;
 }
 
 .paper-card,
 .agent-node {
   background: rgb(255 255 255 / 0.86);
-  border: 1px solid #dadada;
+  border: 1px solid var(--line-dark);
   box-shadow: 0 16px 40px rgb(0 0 0 / 0.06);
   position: absolute;
   z-index: 2;
 }
 
 .paper-card {
-  color: #858585;
+  color: var(--muted);
   min-height: 210px;
   padding: 26px;
   text-align: left;
@@ -279,7 +283,7 @@ h1 {
 }
 
 .paper-card strong {
-  color: #5a5a5a;
+  color: var(--ink-soft);
   display: block;
   font-size: 18px;
   line-height: 1.25;
@@ -297,7 +301,7 @@ h1 {
 }
 
 .paper-card i {
-  background: #dfe5ef;
+  background: linear-gradient(90deg, #dfe5ef, var(--gold-soft));
   display: block;
   height: 8px;
   margin-top: 18px;
@@ -340,17 +344,17 @@ h1 {
 }
 
 .agent-node strong {
-  color: #5d5d5d;
+  color: var(--ink-soft);
   font-size: 18px;
 }
 
 .agent-node small {
-  color: #a1a1a1;
+  color: var(--muted);
   margin-top: 8px;
 }
 
 .node-dot {
-  border: 2px solid #8c8c8c;
+  border: 2px solid var(--teal);
   border-radius: 999px;
   display: inline-block;
   height: 9px;
@@ -378,7 +382,7 @@ h1 {
 
 .section-heading h2,
 .closing-cta h2 {
-  color: #4b4b4b;
+  color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(42px, 4.2vw, 68px);
   font-weight: 500;
@@ -388,7 +392,7 @@ h1 {
 
 .section-heading p:not(.eyebrow),
 .closing-cta p:not(.eyebrow) {
-  color: #7b7b7b;
+  color: var(--muted);
   font-size: 20px;
   line-height: 1.55;
   margin: 22px 0 0;
@@ -404,7 +408,7 @@ h1 {
 
 .suite-grid article,
 .agent-tabs article {
-  background: rgb(255 255 255 / 0.84);
+  background: rgb(255 255 255 / 0.86);
   border: 1px solid var(--line);
   border-radius: 22px;
   box-shadow: 0 12px 32px rgb(0 0 0 / 0.04);
@@ -413,7 +417,7 @@ h1 {
 
 .suite-grid span,
 .agent-tabs span {
-  color: var(--gold);
+  color: var(--gold-dark);
   display: block;
   font-size: 13px;
   font-weight: 760;
@@ -423,7 +427,7 @@ h1 {
 
 .suite-grid strong,
 .agent-tabs strong {
-  color: #4f4f4f;
+  color: var(--ink-soft);
   display: block;
   font-size: 21px;
   font-weight: 560;
@@ -435,13 +439,15 @@ h1 {
 }
 
 .agent-tabs p {
-  color: #777;
+  color: var(--muted);
   line-height: 1.55;
   margin: 14px 0 0;
 }
 
 .console-section {
-  background: #fbfaf7;
+  background:
+    radial-gradient(circle at 0% 0%, rgb(217 154 33 / 0.08), transparent 28%),
+    var(--ivory);
 }
 
 .dashboard-shell {
@@ -455,7 +461,7 @@ h1 {
 
 .dashboard-topbar {
   align-items: center;
-  background: #202020;
+  background: var(--ink);
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -491,7 +497,7 @@ h1 {
 }
 
 .executive-strip {
-  background: #f5f1e9;
+  background: var(--honey-wash);
   border-bottom: 1px solid var(--line);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -553,14 +559,14 @@ h1 {
 }
 
 .request-panel h3 {
-  color: #111827;
+  color: var(--ink);
   font-size: 24px;
   margin: 0;
 }
 
 .request-panel p,
 .audit-panel p {
-  color: #526071;
+  color: var(--muted);
   font-size: 17px;
   line-height: 1.55;
   margin: 18px 0 0;
@@ -584,13 +590,13 @@ h1 {
 }
 
 .timeline strong {
-  color: #111827;
+  color: var(--ink);
   display: block;
   font-size: 14px;
 }
 
 .timeline span {
-  color: #526071;
+  color: var(--muted);
   display: block;
   font-size: 13px;
   line-height: 1.38;
@@ -612,7 +618,7 @@ h1 {
 }
 
 .quote-row span {
-  color: #526071;
+  color: var(--muted);
   font-size: 13px;
 }
 
@@ -624,7 +630,7 @@ h1 {
 }
 
 .quote-total strong {
-  color: var(--gold);
+  color: var(--gold-dark);
   font-size: 30px;
 }
 
@@ -657,11 +663,11 @@ h1 {
 
 .learning-list li {
   background: var(--gold-soft);
-  color: #95630f;
+  color: var(--gold-dark);
 }
 
 .audit-panel a {
-  color: #95630f;
+  color: var(--gold-dark);
   display: inline-flex;
   font-weight: 760;
   margin-top: 20px;
@@ -676,7 +682,10 @@ h1 {
 }
 
 .metrics-section {
-  background: #202020;
+  background:
+    radial-gradient(circle at 0% 0%, rgb(217 154 33 / 0.12), transparent 28%),
+    radial-gradient(circle at 100% 100%, rgb(31 143 136 / 0.12), transparent 30%),
+    var(--ink);
   color: #fff;
 }
 
@@ -737,7 +746,7 @@ h1 {
 }
 
 .proof-links a::after {
-  color: #dba64a;
+  color: var(--gold);
   content: "Open";
   font-size: 12px;
 }
@@ -758,7 +767,7 @@ h1 {
   background: #fff;
   border: 1px solid var(--line);
   border-radius: 18px;
-  color: #333;
+  color: var(--ink);
   display: flex;
   font-weight: 700;
   justify-content: center;
@@ -779,9 +788,9 @@ h1 {
 
 .closing-cta {
   background:
-    radial-gradient(circle at 10% 100%, rgb(216 238 255 / 0.9), transparent 24%),
-    radial-gradient(circle at 90% 90%, rgb(247 241 255 / 0.9), transparent 28%),
-    #fbfaf7;
+    radial-gradient(circle at 10% 100%, rgb(31 143 136 / 0.12), transparent 24%),
+    radial-gradient(circle at 90% 90%, rgb(217 154 33 / 0.16), transparent 28%),
+    var(--ivory);
   text-align: center;
 }
 
