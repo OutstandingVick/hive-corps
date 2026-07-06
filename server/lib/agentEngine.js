@@ -54,7 +54,7 @@ function mergeQwenStep(step, qwen) {
   };
 }
 
-export async function runHiveWorkflow({ requestId = "req_001", applyLearning = false } = {}) {
+export async function runHiveWorkflow({ requestId = "req_001", applyLearning = false, persist = true } = {}) {
   const [requests, customers, catalog] = await Promise.all([
     readJson("server/data/requests.json"),
     readJson("server/data/customers.json"),
@@ -233,30 +233,32 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
     }
   };
 
-  await fs.mkdir(path.join(root, "proof/generated"), { recursive: true });
-  await fs.writeFile(path.join(root, "proof/generated/sample-agent-run.json"), JSON.stringify(run, null, 2));
-  await fs.writeFile(path.join(root, "proof/generated/generated-quote.json"), JSON.stringify(run.quote, null, 2));
-  await fs.writeFile(path.join(root, "proof/generated/audit-log.json"), JSON.stringify(run.agents, null, 2));
-  await fs.writeFile(
-    path.join(root, "proof/generated/generated-quote.md"),
-    [
-      `# Quote ${run.quote.quoteId}`,
-      "",
-      `Customer: ${run.quote.customer}`,
-      `Total: ${money(run.quote.total)}`,
-      `Discount: ${Math.round(run.quote.discountRate * 100)}%`,
-      `Margin: ${run.quote.margin}%`,
-      `Delivery: ${run.quote.deliveryPromise}`,
-      "",
-      "## Line Items",
-      "",
-      ...run.quote.lineItems.map((item) => `- ${item.quantity} x ${item.name} (${item.sku}) at ${money(item.unitPrice)} = ${money(item.total)}`),
-      "",
-      "## Customer Email",
-      "",
-      run.quote.emailDraft
-    ].join("\n")
-  );
+  if (persist) {
+    await fs.mkdir(path.join(root, "proof/generated"), { recursive: true });
+    await fs.writeFile(path.join(root, "proof/generated/sample-agent-run.json"), JSON.stringify(run, null, 2));
+    await fs.writeFile(path.join(root, "proof/generated/generated-quote.json"), JSON.stringify(run.quote, null, 2));
+    await fs.writeFile(path.join(root, "proof/generated/audit-log.json"), JSON.stringify(run.agents, null, 2));
+    await fs.writeFile(
+      path.join(root, "proof/generated/generated-quote.md"),
+      [
+        `# Quote ${run.quote.quoteId}`,
+        "",
+        `Customer: ${run.quote.customer}`,
+        `Total: ${money(run.quote.total)}`,
+        `Discount: ${Math.round(run.quote.discountRate * 100)}%`,
+        `Margin: ${run.quote.margin}%`,
+        `Delivery: ${run.quote.deliveryPromise}`,
+        "",
+        "## Line Items",
+        "",
+        ...run.quote.lineItems.map((item) => `- ${item.quantity} x ${item.name} (${item.sku}) at ${money(item.unitPrice)} = ${money(item.total)}`),
+        "",
+        "## Customer Email",
+        "",
+        run.quote.emailDraft
+      ].join("\n")
+    );
+  }
 
   return run;
 }

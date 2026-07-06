@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import { runHiveWorkflow } from "../server/lib/agentEngine.js";
 
-const firstRun = await runHiveWorkflow({ requestId: "req_001", applyLearning: false });
-const secondRun = await runHiveWorkflow({ requestId: "req_002", applyLearning: true });
+const firstRun = await runHiveWorkflow({ requestId: "req_001", applyLearning: false, persist: false });
+const secondRun = await runHiveWorkflow({ requestId: "req_002", applyLearning: true, persist: false });
 
 assert.equal(firstRun.risk.approvalRequired, true, "First run should require approval.");
 assert.ok(firstRun.risk.flags.some((flag) => flag.includes("Discount exceeds")), "First run should catch unsafe discount.");
