@@ -13,9 +13,9 @@ Delivery: 6 business days
 
 ## Customer Email
 
-Hi Mira,
+Hi,
 
-Based on your Lagos office rollout, we recommend 12 Dell Latitude 5440 devices with 3-year onsite support. The approved quote total is $14,794 after an 8% rollout discount. Estimated delivery is 6 business days after approval.
+Based on your customer site rollout, we recommend 12 Dell Latitude 5440 devices with 3-year onsite support. The approved quote total is $14,794 after an 8% rollout discount. Estimated delivery is 6 business days after approval.
 
 Best,
 Hive Corps

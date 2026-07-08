@@ -202,6 +202,8 @@ Full script: [docs/demo-script.md](docs/demo-script.md)
 
 Product documentation: [docs/product-documentation.md](docs/product-documentation.md)
 
+Submission packet: [docs/submission-packet.md](docs/submission-packet.md)
+
 ---
 
 ## API Endpoints
@@ -267,6 +269,8 @@ Included files:
 
 - [proof/alibaba-cloud-deployment.md](proof/alibaba-cloud-deployment.md)
 - [server/alibaba-cloud-service.example.json](server/alibaba-cloud-service.example.json)
+- [deploy/alibaba-cloud/function-compute/README.md](deploy/alibaba-cloud/function-compute/README.md)
+- [deploy/alibaba-cloud/function-compute/bootstrap](deploy/alibaba-cloud/function-compute/bootstrap)
 
 Before final submission, add:
 
@@ -274,6 +278,8 @@ Before final submission, add:
 - The deployed URL.
 - Alibaba Cloud console/service evidence.
 - Any real Function Compute, ECS, Log Service, or OSS configuration used.
+
+Current status: the repo is deployment-ready for Alibaba Cloud Function Compute and ECS. Final live cloud proof depends on available Alibaba Cloud compute credits or Function Compute activation.
 
 ---
 

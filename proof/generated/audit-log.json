@@ -7,10 +7,10 @@
       "customer": "AdeptWorks Lagos",
       "quantity": 12,
       "category": "laptop",
-      "location": "Lagos",
-      "urgency": "next week"
+      "location": "customer site",
+      "urgency": "standard"
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   },
   {
     "name": "Planner Agent",
@@ -27,7 +27,7 @@
         "learn_from_edits"
       ]
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   },
   {
     "name": "Memory Agent",
@@ -59,7 +59,7 @@
         "Include itemized quote PDFs for all orders above $15,000."
       ]
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   },
   {
     "name": "Catalog Agent",
@@ -71,7 +71,7 @@
       "stock": 72,
       "leadTimeDays": 4
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   },
   {
     "name": "Risk Agent",
@@ -82,7 +82,7 @@
       "margin": 29.8,
       "approvalRequired": false
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   },
   {
     "name": "Quote Writer Agent",
@@ -91,7 +91,7 @@
     "evidence": {
       "quoteSummary": "12 Dell Latitude 5440 devices with 3-year onsite support for $14,794."
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   },
   {
     "name": "Learning Agent",
@@ -100,6 +100,6 @@
     "evidence": {
       "learningMode": "human-approved memory and policy proposals"
     },
-    "timestamp": "2026-07-06T11:50:57.377Z"
+    "timestamp": "2026-07-08T13:34:00.297Z"
   }
 ]
