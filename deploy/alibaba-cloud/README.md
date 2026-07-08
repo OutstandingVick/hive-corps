@@ -19,6 +19,7 @@ The recommended hackathon path is **Alibaba Cloud ECS with Docker** because it i
 - `scripts/verify-deployment.mjs`
 - `proof/alibaba-cloud-deployment.md`
 - `deploy/alibaba-cloud/ecs-user-data.sh`
+- `deploy/alibaba-cloud/deploy-ecs.sh`
 
 ## Environment Variables
 
@@ -42,6 +43,41 @@ DEMO_MODE=true
 ```
 
 ## ECS Docker Deployment
+
+### Option A: One-command SSH Deploy
+
+Use this when you already have an ECS instance and SSH access.
+
+Prerequisites:
+
+- ECS public IP address.
+- SSH access, for example `root@YOUR_ECS_PUBLIC_IP`.
+- Security group inbound TCP port `8787` open.
+- Qwen Cloud API key if you want live Qwen mode.
+
+From your local project root:
+
+```bash
+QWEN_API_KEY="your_qwen_cloud_key" \
+ALIBABA_CLOUD_REGION="your-region" \
+deploy/alibaba-cloud/deploy-ecs.sh root@YOUR_ECS_PUBLIC_IP
+```
+
+Fallback-only deployment:
+
+```bash
+DEMO_MODE=true deploy/alibaba-cloud/deploy-ecs.sh root@YOUR_ECS_PUBLIC_IP
+```
+
+The script installs Docker if needed, pulls the public GitHub repo, builds the image, writes `.env.production`, and runs the backend container on port `8787`.
+
+Verify:
+
+```bash
+npm run verify:deployment -- http://YOUR_ECS_PUBLIC_IP:8787
+```
+
+### Option B: Manual ECS Docker Deploy
 
 1. Create an Alibaba Cloud ECS instance.
 2. Open inbound TCP port `8787` in the security group.
