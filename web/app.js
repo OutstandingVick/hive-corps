@@ -2,7 +2,8 @@ const formatCurrency = (amount) =>
   amount.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 const state = {
-  currentRun: null
+  currentRun: null,
+  health: null
 };
 
 const fallbackRuns = {
@@ -98,6 +99,15 @@ function setText(id, value) {
   if (element) element.textContent = value;
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 function titleCaseStatus(status) {
   return status
     .replaceAll("_", " ")
@@ -109,8 +119,8 @@ function renderTimeline(agents) {
     .map(
       (agent) => `
         <li>
-          <strong>${agent.name}</strong>
-          <span>${agent.summary}</span>
+          <strong>${escapeHtml(agent.name)}</strong>
+          <span>${escapeHtml(agent.summary)}</span>
         </li>
       `
     )
@@ -123,8 +133,8 @@ function renderQuote(quote) {
       (item) => `
         <div class="quote-row">
           <div>
-            <strong>${item.name}</strong>
-            <span>${item.quantity} × ${formatCurrency(item.unitPrice)}</span>
+            <strong>${escapeHtml(item.name)}</strong>
+            <span>${escapeHtml(item.quantity)} × ${formatCurrency(item.unitPrice)}</span>
           </div>
           <strong>${formatCurrency(item.total)}</strong>
         </div>
@@ -134,6 +144,7 @@ function renderQuote(quote) {
 
   qs("quoteTotal").textContent = formatCurrency(quote.total);
   qs("quoteTotalLarge").textContent = formatCurrency(quote.total);
+  setText("heroQuoteTotal", formatCurrency(quote.total));
 }
 
 function renderRun(run) {
@@ -157,6 +168,9 @@ function renderRun(run) {
   setText("proofEditCount", editCount);
   setText("proofApprovalStatus", run.risk.approvalRequired ? "Review" : "Approved");
   setText("proofLearningStatus", learningStatus);
+  const isStaticPreview = window.location.protocol === "file:" && !run.qwen;
+  setText("qwenStatus", isStaticPreview ? "Static preview" : run.qwen?.enabled ? "Qwen live" : "Qwen fallback");
+  setText("qwenCalls", `${run.qwen?.successfulCalls || 0}/${run.qwen?.calls?.length || 0} calls`);
 
   renderTimeline(run.agents);
   renderQuote(run.quote);
@@ -164,12 +178,34 @@ function renderRun(run) {
   const riskList = qs("riskFlags");
   riskList.classList.toggle("is-clear", run.risk.flags.length === 0);
   riskList.innerHTML = (run.risk.flags.length ? run.risk.flags : ["No high-risk issues found."])
-    .map((flag) => `<li>${flag}</li>`)
+    .map((flag) => `<li>${escapeHtml(flag)}</li>`)
     .join("");
 
   qs("learningList").innerHTML = run.learning.proposals
-    .map((proposal) => `<li>${proposal}</li>`)
+    .map((proposal) => `<li>${escapeHtml(proposal)}</li>`)
     .join("");
+}
+
+async function loadHealth() {
+  if (window.location.protocol === "file:") {
+    setText("qwenStatus", "Static preview");
+    setText("qwenCalls", "0 calls");
+    setText("workflowNotice", "Open through npm start to execute backend agents and export proof artifacts.");
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/health");
+    if (!response.ok) throw new Error("Health check failed");
+    state.health = await response.json();
+    setText("qwenStatus", state.health.qwen.enabled ? "Qwen live" : "Qwen fallback");
+    setText("workflowNotice", state.health.qwen.enabled
+      ? `Backend ready. Live Qwen model: ${state.health.qwen.model}.`
+      : "Backend ready in deterministic fallback. Set DEMO_MODE=false and QWEN_API_KEY for live Qwen calls.");
+  } catch {
+    setText("qwenStatus", "Backend offline");
+    setText("workflowNotice", "Backend is not reachable. Static preview data will be used.");
+  }
 }
 
 async function runDemo(requestId = "req_001", applyLearning = false) {
@@ -187,8 +223,54 @@ async function runDemo(requestId = "req_001", applyLearning = false) {
   }
 }
 
+async function runCustomWorkflow() {
+  const button = qs("runCustom");
+  const request = qs("customRequest").value.trim();
+
+  if (request.length < 24) {
+    setText("workflowNotice", "Add a customer request with enough detail to run the workflow.");
+    return;
+  }
+
+  if (window.location.protocol === "file:") {
+    renderRun(fallbackRuns.req_001);
+    setText("workflowNotice", "Static preview loaded. Run npm start and open localhost to execute this custom request.");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "Running agents...";
+  setText("workflowNotice", "Backend agents are processing the request and exporting proof artifacts.");
+
+  try {
+    const response = await fetch("/api/workflows", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        request,
+        company: "Dashboard submitted account",
+        subject: "Dashboard quote request",
+        persist: true
+      })
+    });
+    const run = await response.json();
+    if (!response.ok) throw new Error(run.error || "Could not run custom workflow");
+    renderRun(run);
+    setText("workflowNotice", "Workflow complete. Latest quote, audit log, and agent run proof were exported.");
+  } catch (error) {
+    setText("workflowNotice", error.message);
+  } finally {
+    button.disabled = false;
+    button.textContent = "Run with backend agents";
+  }
+}
+
 qs("runPrimary").addEventListener("click", () => runDemo("req_001", false));
 qs("runLearned").addEventListener("click", () => runDemo("req_002", true));
+qs("runCustom").addEventListener("click", runCustomWorkflow);
+qs("navDemo").addEventListener("click", () => {
+  document.querySelector(".workflow-runner")?.scrollIntoView({ behavior: "smooth", block: "center" });
+});
 document.querySelectorAll("[data-run-primary]").forEach((button) => {
   button.addEventListener("click", () => {
     runDemo("req_001", false);
@@ -196,6 +278,7 @@ document.querySelectorAll("[data-run-primary]").forEach((button) => {
   });
 });
 
+loadHealth();
 runDemo("req_001", false).catch((error) => {
   qs("requestBody").textContent = error.message;
 });

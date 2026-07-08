@@ -29,6 +29,7 @@ The backend exposes:
 - `/api/health`
 - `/api/run-demo?requestId=req_001`
 - `/api/run-demo?requestId=req_002&applyLearning=true`
+- `/api/workflows`
 - `/api/proof/latest`
 
 ## Final Submission Evidence To Add
@@ -41,6 +42,7 @@ Before submitting:
    - The deployed URL.
    - `/api/health` returning product, mode, and timestamp.
    - `/api/run-demo` returning a full agent run.
+   - `/api/workflows` accepting a new customer request and returning a new auditable run.
 3. Add the deployed URL here.
 4. Add the recording URL here.
 5. Run:
@@ -79,6 +81,7 @@ Prepared:
 - Alibaba Cloud deployment guide.
 - Deployment verifier script.
 - Health and demo endpoints.
+- Custom workflow endpoint for judge-submitted quote requests.
 - Proof metadata in workflow responses.
 
 Blocked in this environment:

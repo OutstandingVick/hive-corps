@@ -20,6 +20,31 @@ function isoNow() {
   return new Date().toISOString();
 }
 
+function extractRequestedQuantity(request) {
+  const text = `${request.subject || ""} ${request.body || ""}`;
+  const explicit = text.match(/\b(\d{1,4})\b/);
+  if (explicit) return Number(explicit[1]);
+
+  if (/dozen/i.test(text)) return 12;
+  if (/small|pilot|trial/i.test(text)) return 8;
+  if (/team|department/i.test(text)) return 15;
+  if (/office|rollout|branch|site/i.test(text)) return 25;
+  return 10;
+}
+
+function inferLocation(request) {
+  const text = `${request.subject || ""} ${request.body || ""}`;
+  const locations = ["Lagos", "London", "New York", "Accra", "Nairobi", "Dubai", "Berlin", "Austin"];
+  return locations.find((location) => new RegExp(`\\b${location}\\b`, "i").test(text)) || "customer site";
+}
+
+function inferUrgency(request) {
+  const text = `${request.subject || ""} ${request.body || ""}`;
+  if (/today|asap|urgent|immediately/i.test(text)) return "urgent";
+  if (/tomorrow|this week|next week/i.test(text)) return "near-term";
+  return "standard";
+}
+
 function makeStep(name, status, summary, evidence = {}) {
   return {
     name,
@@ -54,21 +79,32 @@ function mergeQwenStep(step, qwen) {
   };
 }
 
-export async function runHiveWorkflow({ requestId = "req_001", applyLearning = false, persist = true } = {}) {
+export async function runHiveWorkflow({ requestId = "req_001", requestOverride = null, applyLearning = false, persist = true } = {}) {
   const [requests, customers, catalog] = await Promise.all([
     readJson("server/data/requests.json"),
     readJson("server/data/customers.json"),
     readJson("server/data/catalog.json")
   ]);
 
-  const request = requests.find((item) => item.id === requestId) || requests[0];
-  const customer = customers.find((item) => item.company === request.company);
+  const request = requestOverride || requests.find((item) => item.id === requestId) || requests[0];
+  const effectiveRequestId = request.id || requestId;
+  const customer = customers.find((item) => item.company === request.company) || {
+    company: request.company || "Custom B2B Account",
+    memories: [
+      "Prefers reliable business laptops with onsite support.",
+      "Requires conservative delivery promises for multi-device rollouts."
+    ],
+    approvedPolicies: [
+      "Discounts above 10% require manager approval.",
+      "Orders above 20 units should include a human delivery review."
+    ]
+  };
   const laptop = catalog.find((item) => item.sku === "LAP-DELL-5440");
   const support = catalog.find((item) => item.sku === "SUP-3YR-ONSITE");
 
-  const quantity = requestId === "req_002" ? 12 : 25;
-  const proposedDiscountRate = applyLearning || requestId === "req_002" ? 0.08 : 0.15;
-  const discountRate = requestId === "req_001" && !applyLearning ? 0.08 : proposedDiscountRate;
+  const quantity = requestOverride ? extractRequestedQuantity(request) : effectiveRequestId === "req_002" ? 12 : 25;
+  const proposedDiscountRate = applyLearning || effectiveRequestId === "req_002" ? 0.08 : 0.15;
+  const discountRate = effectiveRequestId === "req_001" && !applyLearning ? 0.08 : proposedDiscountRate;
   const supportIncluded = true;
   const subtotal = quantity * laptop.unitPrice + (supportIncluded ? quantity * support.unitPrice : 0);
   const discount = Math.round(subtotal * discountRate);
@@ -81,7 +117,11 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
   if (quantity > 20 && laptop.leadTimeDays < 5) riskFlags.push("Large rollout needs conservative delivery promise.");
   if (margin < 20) riskFlags.push("Margin is below target threshold.");
 
-  const humanEdit = requestId === "req_001"
+  const location = inferLocation(request);
+  const urgency = inferUrgency(request);
+  const needsHumanEdit = !applyLearning && (effectiveRequestId === "req_001" || requestOverride);
+
+  const humanEdit = needsHumanEdit
     ? {
         changedDiscountFrom: "15%",
         changedDiscountTo: "8%",
@@ -91,7 +131,7 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
       }
     : null;
 
-  const learning = requestId === "req_001"
+  const learning = needsHumanEdit
     ? {
         status: "proposed",
         proposals: [
@@ -111,7 +151,7 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
       };
 
   const quoteDraft = {
-    quoteId: `qt_${requestId}`,
+    quoteId: `qt_${effectiveRequestId}`,
     customer: request.company,
     lineItems: [
       {
@@ -135,8 +175,8 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
     discount,
     total,
     margin,
-    deliveryPromise: requestId === "req_001" && !applyLearning ? "4 business days proposed; human changed to 6 business days" : "6 business days",
-    emailDraft: `Hi Mira,\n\nBased on your Lagos office rollout, we recommend ${quantity} ${laptop.name} devices with 3-year onsite support. The approved quote total is ${money(total)} after an ${Math.round(discountRate * 100)}% rollout discount. Estimated delivery is 6 business days after approval.\n\nBest,\nHive Corps`
+    deliveryPromise: needsHumanEdit ? "4 business days proposed; human changed to 6 business days" : "6 business days",
+    emailDraft: `Hi,\n\nBased on your ${location} rollout, we recommend ${quantity} ${laptop.name} devices with 3-year onsite support. The approved quote total is ${money(total)} after an ${Math.round(discountRate * 100)}% rollout discount. Estimated delivery is 6 business days after approval.\n\nBest,\nHive Corps`
   };
 
   const qwen = await runQwenAgentLayer({
@@ -158,8 +198,8 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
       customer: request.company,
       quantity,
       category: "laptop",
-      location: "Lagos",
-      urgency: "next week"
+      location,
+      urgency
     }),
     makeStep("Planner Agent", "complete", "Created a quote-to-response task graph with memory, catalog, risk, approval, and learning steps.", {
       plan: ["retrieve_memory", "check_catalog", "price_quote", "review_risk", "approval_gate", "generate_output", "learn_from_edits"]
@@ -193,7 +233,7 @@ export async function runHiveWorkflow({ requestId = "req_001", applyLearning = f
   const qwenRisk = qwenResultFor(qwen, "Risk Agent")?.json;
 
   const run = {
-    runId: `run_${requestId}_${Date.now()}`,
+    runId: `run_${effectiveRequestId}_${Date.now()}`,
     mode: getQwenConfig().enabled ? "qwen-live" : "deterministic-demo",
     qwen,
     request,

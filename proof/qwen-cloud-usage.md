@@ -26,6 +26,12 @@ POST {QWEN_BASE_URL}/chat/completions
 Authorization: Bearer {QWEN_API_KEY}
 ```
 
+The dashboard exposes this mode in the runtime pills:
+
+- `Qwen live` means backend workflow runs are calling Qwen Cloud.
+- `Qwen fallback` means the backend is available but using deterministic business logic.
+- `Static preview` means the HTML file was opened directly without the backend.
+
 ## Qwen-Powered Agents
 
 The live layer calls Qwen for:
@@ -58,4 +64,3 @@ Each Qwen-backed agent step includes:
 If a Qwen call fails, Hive Corps keeps the workflow running with deterministic business logic and records the failed Qwen call in the `qwen.calls` section of the proof artifact.
 
 This makes the product judge-verifiable without hiding provider failures.
-

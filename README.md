@@ -133,6 +133,8 @@ Open:
 http://localhost:8787
 ```
 
+Use the dashboard textarea to submit a new customer quote request and click **Run with backend agents**. This calls the local backend, runs the agent corps, updates the dashboard, and exports fresh proof artifacts under `proof/generated/`.
+
 Run the seeded workflow and export proof artifacts:
 
 ```bash
@@ -163,6 +165,12 @@ ALIBABA_CLOUD_SERVICE=ecs
 `DEMO_MODE=true` runs deterministic proof fixtures.
 
 `DEMO_MODE=false` enables live Qwen Cloud calls when `QWEN_API_KEY` is configured. The app calls the OpenAI-compatible chat completions endpoint at `{QWEN_BASE_URL}/chat/completions`.
+
+Example live Qwen run:
+
+```bash
+DEMO_MODE=false QWEN_API_KEY=your_qwen_cloud_key npm start
+```
 
 Qwen usage proof: [proof/qwen-cloud-usage.md](proof/qwen-cloud-usage.md)
 
@@ -204,8 +212,21 @@ Product documentation: [docs/product-documentation.md](docs/product-documentatio
 | `/api/requests` | `GET` | Returns seeded B2B quote requests. |
 | `/api/run-demo?requestId=req_001` | `GET` | Runs first quote workflow. |
 | `/api/run-demo?requestId=req_002&applyLearning=true` | `GET` | Runs second improved workflow. |
+| `/api/workflows` | `POST` | Runs a custom quote request through the backend agent corps and exports proof. |
 | `/api/proof/latest` | `GET` | Returns latest exported agent run. |
 | `/api/architecture` | `GET` | Returns architecture summary. |
+
+Custom workflow request:
+
+```bash
+curl -X POST http://localhost:8787/api/workflows \
+  -H "Content-Type: application/json" \
+  -d '{
+    "company": "AdeptWorks",
+    "subject": "Laptop rollout quote",
+    "request": "We need 18 reliable laptops for our Accra operations team next week. Please include onsite support and the best discount you can safely approve."
+  }'
+```
 
 ---
 

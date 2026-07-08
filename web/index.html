@@ -110,13 +110,28 @@
           </p>
         </div>
 
+        <section class="workflow-runner" aria-label="Run a custom quote workflow">
+          <div>
+            <span>Submit a messy customer request</span>
+            <textarea id="customRequest" rows="5">Hi, we need 18 reliable laptops for our Accra operations team. We prefer Dell if possible, need onsite support, and want delivery by next week. Can you send a quote with the best discount you can approve?</textarea>
+          </div>
+          <div class="runner-actions">
+            <button id="runCustom" class="primary-action" type="button">Run with backend agents</button>
+            <p id="workflowNotice">Run locally or on Alibaba Cloud to execute the backend workflow. Static file mode uses a safe preview.</p>
+          </div>
+        </section>
+
         <section class="dashboard-shell" aria-label="Hive Corps operations console preview">
           <div class="dashboard-topbar">
             <div>
               <span class="status-dot"></span>
               <strong>Quote Operations Console</strong>
             </div>
-            <span id="modeLabel" class="mode-pill">deterministic-demo</span>
+            <div class="runtime-pills" aria-label="Runtime status">
+              <span id="modeLabel" class="mode-pill">deterministic-demo</span>
+              <span id="qwenStatus" class="mode-pill">Qwen checking</span>
+              <span id="qwenCalls" class="mode-pill">0 calls</span>
+            </div>
           </div>
 
           <div class="executive-strip" aria-label="Workflow summary">

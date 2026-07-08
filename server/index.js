@@ -24,6 +24,20 @@ async function sendJson(res, data, status = 200) {
   res.end(JSON.stringify(data, null, 2));
 }
 
+async function readJsonBody(req) {
+  let body = "";
+
+  for await (const chunk of req) {
+    body += chunk;
+    if (body.length > 100_000) {
+      throw new Error("Request body is too large.");
+    }
+  }
+
+  if (!body.trim()) return {};
+  return JSON.parse(body);
+}
+
 async function serveFile(res, filePath) {
   try {
     const ext = path.extname(filePath);
@@ -66,6 +80,40 @@ const server = http.createServer(async (req, res) => {
     const persist = url.searchParams.get("persist") !== "false" && process.env.PERSIST_RUNS !== "false";
     const run = await runHiveWorkflow({ requestId, applyLearning, persist });
     return sendJson(res, { ...run, validation: validateRun(run) });
+  }
+
+  if (url.pathname === "/api/workflows" && req.method === "POST") {
+    try {
+      const payload = await readJsonBody(req);
+      const text = String(payload.request || payload.body || "").trim();
+
+      if (text.length < 24) {
+        return sendJson(res, {
+          ok: false,
+          error: "Add a messy customer quote request with enough detail to run the workflow."
+        }, 400);
+      }
+
+      const persist = payload.persist !== false && process.env.PERSIST_RUNS !== "false";
+      const run = await runHiveWorkflow({
+        requestOverride: {
+          id: payload.id || `req_custom_${Date.now()}`,
+          company: payload.company || "Custom B2B Account",
+          subject: payload.subject || "Custom quote request",
+          body: text,
+          source: "dashboard-post"
+        },
+        applyLearning: Boolean(payload.applyLearning),
+        persist
+      });
+
+      return sendJson(res, { ...run, validation: validateRun(run) }, 201);
+    } catch (error) {
+      return sendJson(res, {
+        ok: false,
+        error: error.message || "Could not run custom workflow."
+      }, 400);
+    }
   }
 
   if (url.pathname === "/api/proof/latest") {
