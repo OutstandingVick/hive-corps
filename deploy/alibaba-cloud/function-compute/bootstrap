@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -eu
+
+# Alibaba Cloud Function Compute custom runtimes provide FC_SERVER_PORT.
+# Hive Corps reads PORT, so this bridge lets the same backend run locally,
+# in Docker, on ECS, and in Function Compute.
+export PORT="${FC_SERVER_PORT:-${PORT:-9000}}"
+export ALIBABA_CLOUD_SERVICE="${ALIBABA_CLOUD_SERVICE:-function-compute}"
+
+node server/index.js

@@ -4,11 +4,12 @@ This guide prepares Hive Corps for the hackathon requirement:
 
 > Demonstrate that the backend is running on Alibaba Cloud with a short recording and provide a code file showing Alibaba Cloud service/API use.
 
-The recommended hackathon path is **Alibaba Cloud ECS with Docker** because it is easy for judges to verify:
+The lowest-cost hackathon path is **Alibaba Cloud Function Compute** because it avoids an always-on ECS instance. ECS with Docker remains available if you already have server credits or SSH access.
 
 - The same backend runs locally and in the cloud.
 - `/api/health` proves the deployed service is alive.
 - `/api/run-demo` proves the full agent workflow runs from the cloud backend.
+- `/api/workflows` proves judges can submit a new quote request.
 - The Dockerfile and deployment files are visible in the public repo.
 
 ## Files Added for Deployment
@@ -20,6 +21,9 @@ The recommended hackathon path is **Alibaba Cloud ECS with Docker** because it i
 - `proof/alibaba-cloud-deployment.md`
 - `deploy/alibaba-cloud/ecs-user-data.sh`
 - `deploy/alibaba-cloud/deploy-ecs.sh`
+- `deploy/alibaba-cloud/function-compute/README.md`
+- `deploy/alibaba-cloud/function-compute/bootstrap`
+- `deploy/alibaba-cloud/function-compute/s.example.yaml`
 
 ## Environment Variables
 
@@ -42,7 +46,37 @@ For a fallback-only deployment, set:
 DEMO_MODE=true
 ```
 
-## ECS Docker Deployment
+## Recommended: Function Compute Deployment
+
+Use this path when you do not have funds for ECS.
+
+Read:
+
+```text
+deploy/alibaba-cloud/function-compute/README.md
+```
+
+High-level steps:
+
+1. Open Alibaba Cloud Console.
+2. Search **Function Compute**.
+3. Create a custom runtime function.
+4. Upload this repo as a ZIP.
+5. Use startup command:
+
+```bash
+/bin/sh deploy/alibaba-cloud/function-compute/bootstrap
+```
+
+6. Add a public HTTP trigger.
+7. Add Qwen environment variables.
+8. Verify:
+
+```bash
+npm run verify:deployment -- https://YOUR_FUNCTION_HTTP_TRIGGER_URL
+```
+
+## Alternative: ECS Docker Deployment
 
 ### Option A: One-command SSH Deploy
 

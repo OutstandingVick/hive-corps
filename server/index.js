@@ -20,7 +20,12 @@ const mimeTypes = {
 };
 
 async function sendJson(res, data, status = 200) {
-  res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
+  res.writeHead(status, {
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json; charset=utf-8"
+  });
   res.end(JSON.stringify(data, null, 2));
 }
 
@@ -42,10 +47,16 @@ async function serveFile(res, filePath) {
   try {
     const ext = path.extname(filePath);
     const body = await fs.readFile(filePath);
-    res.writeHead(200, { "Content-Type": mimeTypes[ext] || "application/octet-stream" });
+    res.writeHead(200, {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": mimeTypes[ext] || "application/octet-stream"
+    });
     res.end(body);
   } catch {
-    res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+    res.writeHead(404, {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "text/plain; charset=utf-8"
+    });
     res.end("Not found");
   }
 }
@@ -53,12 +64,26 @@ async function serveFile(res, filePath) {
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
 
+  if (req.method === "OPTIONS") {
+    res.writeHead(204, {
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Origin": "*"
+    });
+    return res.end();
+  }
+
   if (url.pathname === "/api/health") {
     const qwen = getQwenConfig();
     return sendJson(res, {
       ok: true,
       product: "Hive Corps",
       mode: qwen.enabled ? "qwen-live" : "deterministic-demo",
+      cloud: {
+        provider: "Alibaba Cloud",
+        service: process.env.ALIBABA_CLOUD_SERVICE || "local",
+        region: process.env.ALIBABA_CLOUD_REGION || "local"
+      },
       qwen: {
         enabled: qwen.enabled,
         model: qwen.model,

@@ -1,0 +1,43 @@
+edition: 3.0.0
+name: hive-corps
+access: default
+
+vars:
+  region: ${env(ALIBABA_CLOUD_REGION)}
+
+resources:
+  hive-corps-api:
+    component: fc3
+    props:
+      region: ${vars.region}
+      functionName: hive-corps-api
+      description: Hive Corps Qwen-powered B2B quote workflow backend
+      runtime: custom.debian10
+      code: ../../../
+      handler: not-used-by-custom-runtime
+      timeout: 60
+      memorySize: 512
+      diskSize: 512
+      instanceConcurrency: 10
+      environmentVariables:
+        DEMO_MODE: ${env(DEMO_MODE)}
+        QWEN_API_KEY: ${env(QWEN_API_KEY)}
+        QWEN_MODEL: ${env(QWEN_MODEL)}
+        QWEN_BASE_URL: ${env(QWEN_BASE_URL)}
+        QWEN_TIMEOUT_MS: ${env(QWEN_TIMEOUT_MS)}
+        ALIBABA_CLOUD_REGION: ${env(ALIBABA_CLOUD_REGION)}
+        ALIBABA_CLOUD_SERVICE: function-compute
+      customRuntimeConfig:
+        command:
+          - /bin/sh
+          - deploy/alibaba-cloud/function-compute/bootstrap
+      triggers:
+        - triggerName: hive-corps-http
+          triggerType: http
+          qualifier: LATEST
+          triggerConfig:
+            authType: anonymous
+            methods:
+              - GET
+              - POST
+              - OPTIONS

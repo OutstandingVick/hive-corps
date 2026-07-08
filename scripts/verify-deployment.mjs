@@ -56,6 +56,7 @@ if (!customRun.validation?.ok) {
 console.log("Hive Corps deployment verified.");
 console.log(`URL: ${normalized}`);
 console.log(`Mode: ${health.mode}`);
+console.log(`Cloud service: ${health.cloud?.service || "unknown"}`);
 console.log(`Qwen enabled: ${health.qwen?.enabled}`);
 console.log(`Run ID: ${run.runId}`);
 console.log(`Custom run ID: ${customRun.runId}`);

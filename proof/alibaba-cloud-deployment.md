@@ -10,17 +10,20 @@ Hackathon requirement:
 - `server/index.js`
 - `Dockerfile`
 - `deploy/alibaba-cloud/README.md`
+- `deploy/alibaba-cloud/function-compute/README.md`
+- `deploy/alibaba-cloud/function-compute/bootstrap`
+- `deploy/alibaba-cloud/function-compute/s.example.yaml`
 - `scripts/verify-deployment.mjs`
 - `/api/health`
 
 ## Recommended Deployment Target
 
-**Alibaba Cloud ECS with Docker**
+**Alibaba Cloud Function Compute custom runtime**
 
-This path is intentionally simple for judges:
+This path avoids an always-on ECS instance while still proving the backend runs on Alibaba Cloud infrastructure:
 
 ```text
-Alibaba Cloud ECS -> Docker container -> Node backend -> Hive Corps dashboard/API
+HTTP Trigger -> Function Compute custom runtime -> Node backend -> Hive Corps dashboard/API
 ```
 
 The backend exposes:
@@ -36,7 +39,7 @@ The backend exposes:
 
 Before submitting:
 
-1. Deploy the Node backend to Alibaba Cloud ECS or Function Compute.
+1. Deploy the Node backend to Alibaba Cloud Function Compute or ECS.
 2. Record a short video showing:
    - Alibaba Cloud console/service page.
    - The deployed URL.
@@ -78,6 +81,8 @@ Approval status: human_edit_required
 Prepared:
 
 - Dockerfile for ECS/container deployment.
+- Function Compute custom runtime bootstrap.
+- Function Compute deployment guide and Serverless Devs example config.
 - Alibaba Cloud deployment guide.
 - Deployment verifier script.
 - Health and demo endpoints.
@@ -92,4 +97,4 @@ Blocked in this environment:
 
 Next action:
 
-Deploy from an Alibaba Cloud ECS instance or from a machine with Docker daemon access and Alibaba Cloud credentials.
+Deploy through Alibaba Cloud Function Compute using the custom runtime guide, then run `npm run verify:deployment -- https://YOUR_FUNCTION_HTTP_TRIGGER_URL`.
