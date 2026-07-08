@@ -204,6 +204,8 @@ Product documentation: [docs/product-documentation.md](docs/product-documentatio
 
 Submission packet: [docs/submission-packet.md](docs/submission-packet.md)
 
+Vercel deployment notes: [docs/vercel-deployment.md](docs/vercel-deployment.md)
+
 ---
 
 ## API Endpoints

@@ -240,7 +240,7 @@ async function runCustomWorkflow() {
 
   button.disabled = true;
   button.textContent = "Running agents...";
-  setText("workflowNotice", "Backend agents are processing the request and exporting proof artifacts.");
+  setText("workflowNotice", "Backend agents are processing the request and returning auditable proof.");
 
   try {
     const response = await fetch("/api/workflows", {
@@ -256,7 +256,10 @@ async function runCustomWorkflow() {
     const run = await response.json();
     if (!response.ok) throw new Error(run.error || "Could not run custom workflow");
     renderRun(run);
-    setText("workflowNotice", "Workflow complete. Latest quote, audit log, and agent run proof were exported.");
+    const service = state.health?.cloud?.service || "";
+    setText("workflowNotice", service === "vercel-serverless"
+      ? "Workflow complete. Vercel returned auditable proof for this run; persistent proof export is available in local or Alibaba deployment mode."
+      : "Workflow complete. Latest quote, audit log, and agent run proof were exported.");
   } catch (error) {
     setText("workflowNotice", error.message);
   } finally {

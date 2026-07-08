@@ -21,6 +21,16 @@ Hive Corps turns messy B2B quote requests into approved, auditable customer resp
 
 https://github.com/OutstandingVick/hive-corps
 
+## Public Demo URL
+
+Use the Vercel deployment URL if available.
+
+Important:
+
+```text
+Vercel is a public product demo host. Alibaba Cloud deployment proof is still pending compute credits or Function Compute activation.
+```
+
 ## What It Does
 
 Hive Corps coordinates specialized agents for:
