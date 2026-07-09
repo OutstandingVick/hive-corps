@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hive Corps | Product Documentation</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="docs-body">
+    <header class="docs-header">
+      <a class="brand" href="./index.html" aria-label="Hive Corps home">
+        <img src="../brand/hive-corps-mark.svg" alt="" />
+        <span>Hive Corps</span>
+      </a>
+      <nav aria-label="Documentation">
+        <a href="#overview">Overview</a>
+        <a href="#problem">Problem</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#submission">Submission</a>
+      </nav>
+      <a class="nav-cta" href="./index.html#workflow">Run workflow</a>
+    </header>
+
+    <main class="docs-page">
+      <section class="docs-hero" id="overview">
+        <div class="docs-hero-copy">
+          <p class="eyebrow">Product documentation</p>
+          <h1>Self-improving agents for B2B quote operations.</h1>
+          <p>
+            Hive Corps turns messy customer quote requests into structured, approved,
+            auditable responses through a coordinated Qwen-powered agent workflow.
+          </p>
+          <div class="docs-actions">
+            <a class="primary-action" href="./index.html#workflow">Open product demo</a>
+            <a class="secondary-link" href="../proof/generated/sample-agent-run.json">View proof JSON</a>
+          </div>
+        </div>
+
+        <aside class="docs-summary-card" aria-label="Project summary">
+          <span>Hackathon track</span>
+          <strong>Autopilot Agent</strong>
+          <dl>
+            <div>
+              <dt>Primary workflow</dt>
+              <dd>Quote request to approved response</dd>
+            </div>
+            <div>
+              <dt>Agent system</dt>
+              <dd>Intake, planning, memory, catalog, risk, writing, learning</dd>
+            </div>
+            <div>
+              <dt>Deployment</dt>
+              <dd>Alibaba Function Compute-ready, Vercel demo-ready</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="docs-shell">
+        <aside class="docs-toc" aria-label="Table of contents">
+          <span>Contents</span>
+          <a href="#problem">Problem</a>
+          <a href="#users">Users</a>
+          <a href="#solution">Solution</a>
+          <a href="#features">Features</a>
+          <a href="#flow">User flow</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#submission">Submission fit</a>
+          <a href="#roadmap">Roadmap</a>
+        </aside>
+
+        <div class="docs-content">
+          <section class="docs-section" id="problem">
+            <p class="eyebrow">Problem statement</p>
+            <h2>B2B teams lose revenue when quote work is slow, manual, and impossible to audit.</h2>
+            <p>
+              Quote requests arrive as messy emails and chat messages. Teams still need to
+              interpret requirements, check catalog data, remember customer preferences, apply
+              pricing policy, draft a response, and route risky decisions for approval.
+            </p>
+            <div class="insight-grid">
+              <article>
+                <strong>77%</strong>
+                <span>of surveyed U.S. B2B commerce executives see digital transformation as critical.</span>
+              </article>
+              <article>
+                <strong>78%</strong>
+                <span>say customers demand more digitized sales processes.</span>
+              </article>
+              <article>
+                <strong>13%</strong>
+                <span>estimated sales lost on average from negative sales process experiences.</span>
+              </article>
+            </div>
+            <p class="source-note">
+              Source: Deloitte / Wall Street Journal, B2B commerce strategy research.
+            </p>
+          </section>
+
+          <section class="docs-section" id="users">
+            <p class="eyebrow">Target users</p>
+            <h2>Built for the people who own quote speed, margin, and control.</h2>
+            <div class="persona-grid">
+              <article>
+                <span>01</span>
+                <h3>Sales operations</h3>
+                <p>Reduce quote turnaround time while keeping pricing, margin, and approvals consistent.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <h3>Account executives</h3>
+                <p>Respond faster without reconstructing customer context from scattered systems.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <h3>Finance approvers</h3>
+                <p>Review risky discounts and delivery promises with full context and audit evidence.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="docs-section" id="solution">
+            <p class="eyebrow">Proposed solution</p>
+            <h2>A controlled autonomous workflow, not another chatbot.</h2>
+            <p>
+              Hive Corps coordinates specialized agents that perform the quote workflow end to end.
+              The system can move autonomously through low-risk steps, but risky pricing and
+              delivery decisions stop at a human approval gate.
+            </p>
+            <div class="docs-callout">
+              <strong>Controlled self-improvement</strong>
+              <p>
+                Human edits become proposed memory and policy updates. Hive Corps improves over
+                time without silently rewriting business rules or bypassing approvals.
+              </p>
+            </div>
+          </section>
+
+          <section class="docs-section" id="features">
+            <p class="eyebrow">Key features</p>
+            <h2>The product surface judges can verify quickly.</h2>
+            <div class="feature-doc-grid">
+              <article><strong>Multi-agent workflow</strong><span>Specialized agents with clear roles and outputs.</span></article>
+              <article><strong>Persistent memory</strong><span>Customer preferences and policies are reused across sessions.</span></article>
+              <article><strong>Catalog tool layer</strong><span>Quotes are grounded in products, pricing, stock, and support data.</span></article>
+              <article><strong>Risk gate</strong><span>Unsafe discounts, margin risks, and delivery promises are flagged.</span></article>
+              <article><strong>Approval controls</strong><span>High-impact decisions pause for human review.</span></article>
+              <article><strong>Audit proof</strong><span>Every run exports agent decisions, quote output, and learning proposals.</span></article>
+            </div>
+          </section>
+
+          <section class="docs-section" id="flow">
+            <p class="eyebrow">User flow</p>
+            <h2>From ambiguous request to approved customer response.</h2>
+            <ol class="flow-list">
+              <li><span>Trigger</span><p>A customer submits a messy quote request.</p></li>
+              <li><span>Plan</span><p>The agent corps extracts requirements and creates a workflow plan.</p></li>
+              <li><span>Decide</span><p>Memory, catalog, pricing, and policy checks shape the quote.</p></li>
+              <li><span>Approve</span><p>Risky decisions route to a human approval gate.</p></li>
+              <li><span>Output</span><p>Hive Corps generates a customer-ready quote and proof trail.</p></li>
+              <li><span>Learn</span><p>Human edits become reviewable policy and memory proposals.</p></li>
+            </ol>
+          </section>
+
+          <section class="docs-section" id="architecture">
+            <p class="eyebrow">Technical architecture</p>
+            <h2>Qwen orchestration with deterministic business controls.</h2>
+            <div class="docs-arch">
+              <span>Customer Request</span>
+              <span>Hive Corps API</span>
+              <span>Qwen Agent Layer</span>
+              <span>Catalog + Memory</span>
+              <span>Risk Gate</span>
+              <span>Quote Output</span>
+              <span>Audit + Learning</span>
+            </div>
+            <p>
+              Qwen is used for role-specific reasoning and writing in live mode. Deterministic
+              logic owns pricing math, approval gates, fallback behavior, and proof export so
+              business controls remain stable.
+            </p>
+          </section>
+
+          <section class="docs-section" id="submission">
+            <p class="eyebrow">Hackathon fit</p>
+            <h2>Designed for the Autopilot Agent track.</h2>
+            <div class="submission-grid">
+              <article>
+                <strong>Complete workflow</strong>
+                <span>Trigger to decision, approval, output, audit, and learning.</span>
+              </article>
+              <article>
+                <strong>Qwen Cloud-ready</strong>
+                <span>Live Qwen mode uses the DashScope-compatible chat completions endpoint.</span>
+              </article>
+              <article>
+                <strong>Production-shaped</strong>
+                <span>Fallbacks, verification commands, deployment assets, and proof artifacts are included.</span>
+              </article>
+            </div>
+          </section>
+
+          <section class="docs-section" id="roadmap">
+            <p class="eyebrow">Roadmap</p>
+            <h2>Next steps after the hackathon.</h2>
+            <ul class="roadmap-list">
+              <li>Complete live Alibaba Cloud Function Compute deployment.</li>
+              <li>Add CRM, email, and procurement integrations.</li>
+              <li>Generate quote PDFs and store artifacts in Alibaba Cloud OSS.</li>
+              <li>Add user authentication and role-based approval controls.</li>
+              <li>Build an evaluation dashboard across historical quote runs.</li>
+            </ul>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer docs-footer" aria-label="Footer">
+      <div class="footer-bottom">
+        <span>© 2026 Hive Corps</span>
+        <span>Product documentation for Qwen Cloud Global AI Hackathon</span>
+      </div>
+    </footer>
+  </body>
+</html>

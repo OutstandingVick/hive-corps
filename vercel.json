@@ -12,6 +12,14 @@
     {
       "source": "/app.js",
       "destination": "/web/app.js"
+    },
+    {
+      "source": "/product-documentation.html",
+      "destination": "/web/product-documentation.html"
+    },
+    {
+      "source": "/docs/product-documentation.md",
+      "destination": "/web/product-documentation.html"
     }
   ]
 }
